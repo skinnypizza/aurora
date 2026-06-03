@@ -1,0 +1,27 @@
+{
+  "id": "SGE-1.1",
+  "title": "Esquema BD PostgreSQL/PostGIS",
+  "priority": "Must",
+  "sp": 8,
+  "status": "Done",
+  "assignee": "JOS",
+  "sprint": 1,
+  "story": "BD PostgreSQL/PostGIS diseñada e implementada con tablas, índices geoespaciales y seed data.",
+  "subtasks": [
+    "Modelo ER completo",
+    "BD PostgreSQL con PostGIS",
+    "Índices geoespaciales GIST",
+    "Migraciones EF Core",
+    "Seed Data"
+  ],
+  "ac": [
+    "BD funcional con PostGIS",
+    "Migraciones sin errores",
+    "Seed data insertada correctamente"
+  ],
+  "deps": [],
+  "created": "2026-05-14T16:07:00.000Z",
+  "updated": "2026-06-02T22:12:22.226Z",
+  "_daysInColumn": 0,
+  "_blocked": false
+}

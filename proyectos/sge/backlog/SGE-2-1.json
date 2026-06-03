@@ -1,0 +1,27 @@
+{
+  "id": "SGE-2.1",
+  "title": "Integración Vue con API de Autenticación (JWT Interceptor)",
+  "priority": "Must",
+  "sp": 5,
+  "status": "Done",
+  "assignee": "ETH",
+  "sprint": 2,
+  "story": "Login desde Vue con JWT automático en todas las peticiones.",
+  "subtasks": [
+    "Configurar Axios con interceptors para adjuntar JWT Bearer token",
+    "Implementar Pinia store de autenticación (login, logout, refresh token)",
+    "Almacenar token en localStorage y restaurar al recargar página",
+    "Implementar redirect a login si token expira (401 interceptor)"
+  ],
+  "ac": [
+    "Login funciona con credenciales reales de la BD",
+    "Token se almacena y reenvía en cada petición",
+    "Si expira el token, redirige al login automáticamente",
+    "Logout limpia token y redirige"
+  ],
+  "deps": [
+    "SGE-1.3"
+  ],
+  "created": "2026-05-14T16:07:00.000Z",
+  "updated": "2026-05-14T16:07:00.000Z"
+}

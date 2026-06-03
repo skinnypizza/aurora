@@ -1,0 +1,29 @@
+{
+  "id": "SGE-2.2",
+  "title": "Dashboard Vue con datos reales de la API",
+  "priority": "Must",
+  "sp": 5,
+  "status": "Done",
+  "assignee": "ETH",
+  "sprint": 2,
+  "story": "Dashboard con datos reales desde la API para monitorear el estado del personal.",
+  "subtasks": [
+    "Conectar Dashboard.vue con GET /api/admin/dashboard/estadisticas",
+    "Mostrar tarjetas con total empleados, en geocerca, fuera de geocerca, alertas hoy",
+    "Implementar tabla de últimas alertas con datos reales",
+    "Agregar indicadores de carga (skeleton loaders)",
+    "Implementar refresh manual y automático cada 30 segundos"
+  ],
+  "ac": [
+    "Dashboard muestra datos reales de la BD",
+    "Indicadores de carga visibles mientras se obtienen datos",
+    "Actualización automática cada 30s",
+    "Manejo de errores si la API no responde"
+  ],
+  "deps": [
+    "SGE-1.7",
+    "SGE-2.1"
+  ],
+  "created": "2026-05-14T16:07:00.000Z",
+  "updated": "2026-05-14T16:07:00.000Z"
+}

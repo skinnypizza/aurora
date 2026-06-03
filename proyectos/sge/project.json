@@ -1,0 +1,52 @@
+{
+  "id": "sge",
+  "title": "SGE — Sistema de Geolocalización de Empleados",
+  "description": "Sistema de monitoreo en tiempo real de empleados con geocercas, notificaciones y app móvil. Proyecto universitario de 4 sprints.",
+  "techStack": [
+    ".NET 9",
+    "PostgreSQL",
+    "PostGIS",
+    "Flutter",
+    "Vue 3",
+    "Mapbox"
+  ],
+  "status": "active",
+  "created": "2026-05-14T16:07:00.000Z",
+  "updated": "2026-06-02T11:49:57.795Z",
+  "currentSprint": 1,
+  "totalSprints": 4,
+  "sprintDurationWeeks": 2,
+  "defaultColumns": [
+    "Backlog",
+    "Todo",
+    "InProgress",
+    "Review",
+    "Done"
+  ],
+  "wipLimits": {
+    "InProgress": 4,
+    "Review": 3
+  },
+  "localMembers": [
+    {
+      "id": "local-1778945844783-fkv1",
+      "alias": "ALP",
+      "name": "Alpha Agent",
+      "role": "AI Sub-Agent",
+      "color": "#8b5cf6",
+      "avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=local-1778945844783-fkv1",
+      "isAI": true,
+      "created": "2026-05-16T15:37:24.783Z"
+    },
+    {
+      "id": "local-1778946088027-7ckp",
+      "alias": "JANE",
+      "name": "Jane AI",
+      "role": "AI Assistant",
+      "color": "#06b6d4",
+      "avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=local-1778946088027-7ckp",
+      "isAI": true,
+      "created": "2026-05-16T15:41:28.027Z"
+    }
+  ]
+}

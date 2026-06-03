@@ -1,0 +1,28 @@
+{
+  "id": "SGE-2.5",
+  "title": "Pantalla Reportes en Vue conectada a API",
+  "priority": "Must",
+  "sp": 5,
+  "status": "Done",
+  "assignee": "ETH",
+  "sprint": 2,
+  "story": "Reportes de asistencia desde Vue con datos reales de la API.",
+  "subtasks": [
+    "Conectar Reportes.vue con GET /api/admin/reportes/asistencia?desde=&hasta=",
+    "Implementar selector de rango de fechas con date picker",
+    "Mostrar resultados en tabla con paginación",
+    "Implementar exportación a CSV",
+    "Agregar filtros por empleado y lugar de trabajo"
+  ],
+  "ac": [
+    "Reportes se generan con datos reales de la BD",
+    "Filtros por fecha, empleado y lugar funcionan",
+    "Exportación a CSV descarga archivo válido",
+    "Paginación funcional para grandes volúmenes"
+  ],
+  "deps": [
+    "SGE-2.1"
+  ],
+  "created": "2026-05-14T16:07:00.000Z",
+  "updated": "2026-05-14T16:07:00.000Z"
+}

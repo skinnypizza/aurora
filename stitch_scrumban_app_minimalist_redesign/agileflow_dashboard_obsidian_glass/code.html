@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AgileFlow - Dashboard</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@200;400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#050505",
+                        "secondary-fixed-dim": "#c0c1ff",
+                        "error-container": "#93000a",
+                        "on-surface": "#e0e3e5",
+                        "inverse-primary": "#5f5e5e",
+                        "tertiary-container": "#040506",
+                        "surface": "#101415",
+                        "on-surface-variant": "#c4c7c7",
+                        "on-secondary-fixed": "#07006c",
+                        "inverse-surface": "#e0e3e5",
+                        "on-background": "#e0e3e5",
+                        "primary": "#c9c6c5",
+                        "secondary": "#c0c1ff",
+                        "on-tertiary-fixed": "#1a1c1e",
+                        "on-error": "#690005",
+                        "surface-container-highest": "#323537",
+                        "surface-container": "#1d2022",
+                        "on-primary-fixed": "#1c1b1b",
+                        "on-error-container": "#ffdad6",
+                        "background": "#101415",
+                        "on-primary-fixed-variant": "#474646",
+                        "surface-bright": "#363a3b",
+                        "surface-dim": "#101415",
+                        "surface-container-low": "#191c1e",
+                        "on-tertiary": "#2f3133",
+                        "on-tertiary-container": "#76777a",
+                        "inverse-on-surface": "#2d3133",
+                        "on-primary": "#313030",
+                        "secondary-fixed": "#e1e0ff",
+                        "on-secondary-fixed-variant": "#2f2ebe",
+                        "secondary-container": "#3131c0",
+                        "primary-fixed-dim": "#c9c6c5",
+                        "on-secondary-container": "#b0b2ff",
+                        "tertiary-fixed-dim": "#c6c6c9",
+                        "surface-tint": "#c9c6c5",
+                        "outline-variant": "#444748",
+                        "tertiary-fixed": "#e2e2e5",
+                        "surface-variant": "#323537",
+                        "surface-container-lowest": "#0b0f10",
+                        "tertiary": "#c6c6c9",
+                        "on-primary-container": "#797777",
+                        "outline": "#8e9192",
+                        "on-secondary": "#1000a9",
+                        "primary-fixed": "#e5e2e1",
+                        "surface-container-high": "#272a2c",
+                        "on-tertiary-fixed-variant": "#454749",
+                        "error": "#ffb4ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin-desktop": "64px",
+                        "unit": "8px",
+                        "container-max": "1200px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Geist"],
+                        "label-md": ["Geist"],
+                        "headline-lg-mobile": ["Geist"],
+                        "display-lg": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "body-md": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "500" }],
+                        "label-md": ["14px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "200" }],
+                        "label-sm": ["12px", { "lineHeight": "1.0", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom scrollbar for immersive feel */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
+        
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Glassmorphism utilities based on Style Guidance */
+        .glass-panel {
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 0.5px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-panel-active {
+            background-color: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(192, 193, 255, 0.3); /* Indigo glow simulation on border */
+            box-shadow: inset 0 0 20px rgba(192, 193, 255, 0.05); /* Internal glow */
+        }
+    </style>
+</head>
+<body class="bg-primary-container text-on-surface min-h-screen font-body-md text-body-md overflow-x-hidden selection:bg-secondary/30 selection:text-secondary-fixed">
+<!-- TopNavBar (JSON Injected Styles) -->
+<nav class="fixed top-0 right-0 w-[calc(100%-5rem)] h-16 bg-surface/30 dark:bg-background/30 backdrop-blur-2xl border-b-[0.5px] border-white/10 dark:border-white/5 flex justify-between items-center px-gutter z-40 hidden md:flex shadow-none">
+<div class="flex items-center gap-4">
+<!-- Brand is primarily in SideNav, but keeping header structural space if needed -->
+<div class="w-64 max-w-full">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/50 text-[18px]">search</span>
+<input class="w-full bg-white/5 border-[0.5px] border-white/10 rounded-full py-1.5 pl-10 pr-4 font-label-md text-label-md text-on-surface focus:outline-none focus:border-secondary/50 focus:ring-1 focus:ring-secondary/50 transition-all placeholder:text-on-surface-variant/40" placeholder="Search operations..." type="text"/>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-unit">
+<button class="p-2 rounded-full hover:bg-white/10 transition-opacity hover:opacity-80 active:scale-95 duration-150 flex items-center justify-center text-on-surface-variant dark:text-tertiary">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</button>
+<button class="p-2 rounded-full hover:bg-white/10 transition-opacity hover:opacity-80 active:scale-95 duration-150 flex items-center justify-center text-on-surface-variant dark:text-tertiary relative">
+<span class="absolute top-2 right-2 w-2 h-2 bg-secondary rounded-full"></span>
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden ml-2 border-[0.5px] border-white/20">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A close-up, high-contrast portrait of a male professional with a neutral expression. The lighting is dramatic and cinematic, employing a stark chiaroscuro effect against a deep, dark obsidian background. The mood is serious, focused, and sophisticated, aligning perfectly with a premium, minimalist tech dashboard aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSJxuZ2W4lkFusvlPn76tvy_wzRMHbTIFJy5YYzz5RiYTKexAfoKUT6elRwdqKo2fw1xo3tugyAvqO4nR7pMftguzXjopN2jJCIiJ1FnjZFaMxebYjLieIEk2VyYJIItyQGSVwC1NoP-2i-pEcrsZ6mj_Ycyrpk9sm03LUD9lNmM-uvOaH3tg4Pzj2l7ypcBqCxh7YQKrLdMW1osPQxMcUI2UJNeyygGMhLArdxgdlTzu2WJQHSZ8DIw0Gx7DGJP3p_e-eNuhaTKNv"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar (JSON Injected Styles) -->
+<aside class="fixed left-0 top-0 h-full w-20 hover:w-64 transition-all duration-500 rounded-r-xl border-r-[0.5px] border-white/10 dark:border-white/5 shadow-2xl bg-white/5 dark:bg-primary-container/5 backdrop-blur-xl flex flex-col py-unit z-50 group hidden md:flex">
+<!-- Brand / Header -->
+<div class="flex items-center px-4 py-6 mb-4 overflow-hidden whitespace-nowrap">
+<div class="w-10 h-10 flex-shrink-0 bg-secondary/10 rounded-xl border border-secondary/20 flex items-center justify-center shadow-[inset_0_0_10px_rgba(192,193,255,0.1)]">
+<span class="material-symbols-outlined text-secondary">token</span>
+</div>
+<div class="ml-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<h1 class="font-headline-md text-headline-md text-on-surface">AgileFlow</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant/60 uppercase tracking-widest mt-1">Premium Project Hub</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 overflow-hidden flex flex-col gap-1 px-2">
+<!-- Active Tab: Dashboard -->
+<a class="flex items-center px-3 py-3 rounded-lg text-secondary dark:text-secondary-fixed bg-secondary-container/10 border-r-2 border-secondary font-body-md text-body-md tracking-wide transition-all duration-300 ease-in-out whitespace-nowrap" href="#">
+<span class="material-symbols-outlined fill" data-icon="dashboard">dashboard</span>
+<span class="ml-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Dashboard</span>
+</a>
+<a class="flex items-center px-3 py-3 rounded-lg text-on-surface-variant/60 dark:text-tertiary-fixed-dim/60 hover:bg-white/10 dark:hover:bg-white/5 hover:text-on-surface transition-all duration-300 ease-in-out font-body-md text-body-md tracking-wide whitespace-nowrap" href="#">
+<span class="material-symbols-outlined" data-icon="tactic">tactic</span>
+<span class="ml-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Projects</span>
+</a>
+<a class="flex items-center px-3 py-3 rounded-lg text-on-surface-variant/60 dark:text-tertiary-fixed-dim/60 hover:bg-white/10 dark:hover:bg-white/5 hover:text-on-surface transition-all duration-300 ease-in-out font-body-md text-body-md tracking-wide whitespace-nowrap" href="#">
+<span class="material-symbols-outlined" data-icon="assignment_turned_in">assignment_turned_in</span>
+<span class="ml-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Tasks</span>
+</a>
+<a class="flex items-center px-3 py-3 rounded-lg text-on-surface-variant/60 dark:text-tertiary-fixed-dim/60 hover:bg-white/10 dark:hover:bg-white/5 hover:text-on-surface transition-all duration-300 ease-in-out font-body-md text-body-md tracking-wide whitespace-nowrap" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="ml-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Team</span>
+</a>
+<a class="flex items-center px-3 py-3 rounded-lg text-on-surface-variant/60 dark:text-tertiary-fixed-dim/60 hover:bg-white/10 dark:hover:bg-white/5 hover:text-on-surface transition-all duration-300 ease-in-out font-body-md text-body-md tracking-wide whitespace-nowrap mt-auto" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="ml-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Settings</span>
+</a>
+</nav>
+<!-- CTA -->
+<div class="px-4 mt-4 overflow-hidden">
+<button class="w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-gradient-to-b from-secondary/20 to-transparent border-t-[1px] border-secondary/40 text-secondary font-label-md text-label-md uppercase tracking-wider hover:bg-secondary/20 transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 absolute group-hover:relative group-hover:translate-x-0 translate-x-4">New Sprint</span>
+</button>
+</div>
+</aside>
+<!-- Mobile Bottom Nav (Fallback) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface/80 backdrop-blur-2xl border-t-[0.5px] border-white/10 z-50 flex justify-around py-3 px-2">
+<a class="flex flex-col items-center text-secondary" href="#"><span class="material-symbols-outlined fill text-[24px]">dashboard</span></a>
+<a class="flex flex-col items-center text-on-surface-variant/60" href="#"><span class="material-symbols-outlined text-[24px]">tactic</span></a>
+<a class="flex flex-col items-center text-on-surface-variant/60" href="#"><span class="material-symbols-outlined text-[24px]">assignment_turned_in</span></a>
+<a class="flex flex-col items-center text-on-surface-variant/60" href="#"><span class="material-symbols-outlined text-[24px]">group</span></a>
+</nav>
+<!-- Main Content Canvas -->
+<main class="md:pl-20 pt-16 min-h-screen relative">
+<!-- Ambient background glow -->
+<div class="fixed top-0 left-1/4 w-[800px] h-[800px] bg-secondary/5 rounded-full blur-[120px] pointer-events-none -z-10 mix-blend-screen"></div>
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 md:py-12 flex flex-col gap-8 md:gap-10 pb-24 md:pb-12">
+<!-- Header Section -->
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<p class="font-label-md text-label-md text-secondary tracking-[0.2em] uppercase mb-2">Current Iteration</p>
+<h2 class="font-display-lg text-headline-lg-mobile md:text-display-lg text-on-surface">Sprint 42 <span class="text-on-surface-variant/40 font-light">| Obsidian</span></h2>
+</div>
+<div class="flex items-center gap-3">
+<span class="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]"></span>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">System Optimal</p>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Sprint Status Widget (Col 4) -->
+<div class="md:col-span-4 glass-panel-active rounded-2xl p-6 md:p-8 flex flex-col justify-between min-h-[240px] relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-6 opacity-20 group-hover:opacity-40 transition-opacity">
+<span class="material-symbols-outlined text-[64px] text-secondary">timelapse</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Sprint Status</h3>
+<p class="font-body-md text-body-md text-on-surface-variant/70">Days remaining in cycle</p>
+</div>
+<div class="flex items-end justify-between mt-8">
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-display-lg text-on-surface leading-none">04</span>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Days</span>
+</div>
+<div class="text-right">
+<p class="font-label-md text-label-md text-secondary mb-2">78% Complete</p>
+<!-- Minimalist progress bar -->
+<div class="w-32 h-1 bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[78%] rounded-full shadow-[0_0_10px_rgba(192,193,255,0.5)]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Burndown Chart Widget (Col 8) -->
+<div class="md:col-span-8 glass-panel rounded-2xl p-6 md:p-8 flex flex-col min-h-[240px]">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Velocity &amp; Burndown</h3>
+<p class="font-body-md text-body-md text-on-surface-variant/70">Story points over time</p>
+</div>
+<button class="bg-white/5 border-[0.5px] border-white/10 rounded-full px-4 py-1.5 font-label-sm text-label-sm uppercase tracking-wider hover:bg-white/10 transition-colors flex items-center gap-2">
+<span>Filter</span>
+<span class="material-symbols-outlined text-[16px]">tune</span>
+</button>
+</div>
+<!-- Abstract representation of a chart in Obsidian style -->
+<div class="flex-1 relative mt-4 w-full h-full flex items-end border-b-[0.5px] border-white/10 pb-4 gap-2">
+<!-- Y-axis labels -->
+<div class="absolute left-0 top-0 h-full flex flex-col justify-between text-on-surface-variant/40 font-label-sm text-label-sm py-4">
+<span>60</span>
+<span>40</span>
+<span>20</span>
+<span>0</span>
+</div>
+<!-- Chart Area (Decorative CSS representation) -->
+<div class="ml-8 flex-1 h-full relative">
+<!-- Guideline -->
+<div class="absolute top-1/2 w-full border-t-[0.5px] border-dashed border-white/5"></div>
+<!-- Ideal line -->
+<svg class="absolute top-0 left-0 w-full h-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<line stroke="rgba(255,255,255,0.1)" stroke-dasharray="4 4" stroke-width="1" x1="0" x2="100" y1="10" y2="90"></line>
+</svg>
+<!-- Actual line (Gradient glow) -->
+<svg class="absolute top-0 left-0 w-full h-full drop-shadow-[0_0_8px_rgba(192,193,255,0.4)]" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M0,15 L20,30 L40,25 L60,50 L80,75 L100,70" fill="none" stroke="#c0c1ff" stroke-linejoin="round" stroke-width="1.5"></path>
+<!-- Gradient fill under line -->
+<path d="M0,15 L20,30 L40,25 L60,50 L80,75 L100,70 L100,100 L0,100 Z" fill="url(#chartGradient)" opacity="0.1"></path>
+<defs>
+<lineargradient id="chartGradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#c0c1ff"></stop>
+<stop offset="100%" stop-color="transparent"></stop>
+</lineargradient>
+</defs>
+</svg>
+<!-- Data points -->
+<div class="absolute top-[15%] left-[0%] w-1.5 h-1.5 bg-secondary rounded-full transform -translate-x-1/2 -translate-y-1/2"></div>
+<div class="absolute top-[30%] left-[20%] w-1.5 h-1.5 bg-secondary rounded-full transform -translate-x-1/2 -translate-y-1/2"></div>
+<div class="absolute top-[25%] left-[40%] w-1.5 h-1.5 bg-secondary rounded-full transform -translate-x-1/2 -translate-y-1/2"></div>
+<div class="absolute top-[50%] left-[60%] w-1.5 h-1.5 bg-secondary rounded-full transform -translate-x-1/2 -translate-y-1/2"></div>
+<div class="absolute top-[75%] left-[80%] w-2 h-2 bg-white rounded-full shadow-[0_0_10px_#fff] transform -translate-x-1/2 -translate-y-1/2"></div> <!-- Current point -->
+</div>
+</div>
+</div>
+<!-- Critical Tasks (Col 7) -->
+<div class="md:col-span-7 glass-panel rounded-2xl p-0 overflow-hidden flex flex-col">
+<div class="p-6 md:p-8 border-b-[0.5px] border-white/10 flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-on-surface">Critical Path</h3>
+<a class="font-label-sm text-label-sm text-secondary uppercase tracking-widest hover:text-white transition-colors" href="#">View All</a>
+</div>
+<div class="flex flex-col">
+<!-- Task Item -->
+<div class="px-6 md:px-8 py-5 border-b-[0.5px] border-white/5 hover:bg-white/[0.08] transition-colors flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full border-[0.5px] border-error/30 bg-error/10 flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-[20px]">priority_high</span>
+</div>
+<div>
+<h4 class="font-body-lg text-body-lg text-on-surface group-hover:text-white transition-colors">API Gateway Authentication</h4>
+<p class="font-body-md text-body-md text-on-surface-variant/60">PRJ-1042 • Backend</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="rounded-full bg-white/5 border-[0.5px] border-white/10 font-label-sm text-label-sm uppercase px-3 py-1 text-on-surface-variant">In Progress</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border-[0.5px] border-white/20">
+<img alt="Assignee" class="w-full h-full object-cover" data-alt="A portrait of a young female software engineer in a dimly lit, modern tech workspace. The ambient light reflects softly off her face, suggesting the glow of a monitor. The aesthetic is cool, dark, and highly professional, fitting a premium dark-mode interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuytF3aXbdPFMkxQDpVYQbVGANReqCTdBAbgrrRJziOujWl87rzkJxtda1F1yt1e8Xibg3fqiTY3yHEBAboohLU1xhT75ylrZXCzYg4rDr_ClZTcix9Cf_vC52pZ3eoTnW4s-naftQUeHKgEYr0hCd6KA2Azk09uGiXFA3SSMY_kDF9Q8_463a-Fou8Z8UEtZhRHd2EUaxdl3uH2Cfm5ds80IstNiBr27cilLm6vO_tPaQQU17LYef_HH9tSccEmvadzZziJJDUSGF"/>
+</div>
+</div>
+</div>
+<!-- Task Item -->
+<div class="px-6 md:px-8 py-5 border-b-[0.5px] border-white/5 hover:bg-white/[0.08] transition-colors flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full border-[0.5px] border-secondary/30 bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">code_blocks</span>
+</div>
+<div>
+<h4 class="font-body-lg text-body-lg text-on-surface group-hover:text-white transition-colors">WebSocket Reconnection Logic</h4>
+<p class="font-body-md text-body-md text-on-surface-variant/60">PRJ-1055 • Realtime</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="rounded-full bg-white/5 border-[0.5px] border-white/10 font-label-sm text-label-sm uppercase px-3 py-1 text-on-surface-variant">Code Review</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border-[0.5px] border-white/20 bg-surface-container-high flex items-center justify-center text-label-sm font-label-sm">
+                                    MK
+                                </div>
+</div>
+</div>
+<!-- Task Item -->
+<div class="px-6 md:px-8 py-5 hover:bg-white/[0.08] transition-colors flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full border-[0.5px] border-white/10 bg-white/5 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">design_services</span>
+</div>
+<div>
+<h4 class="font-body-lg text-body-lg text-on-surface group-hover:text-white transition-colors">Obsidian UI System Tokens</h4>
+<p class="font-body-md text-body-md text-on-surface-variant/60">PRJ-1089 • Design</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="rounded-full bg-white/5 border-[0.5px] border-white/10 font-label-sm text-label-sm uppercase px-3 py-1 text-on-surface-variant">Blocked</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border-[0.5px] border-white/20">
+<img alt="Assignee" class="w-full h-full object-cover" data-alt="A portrait of a male designer looking thoughtfully off-camera. The lighting is low-key, with a subtle blue rim light creating a sleek, futuristic atmosphere. The background is a pure, deep black, maintaining the sophisticated minimal visual style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBReFoL80HHsXbxhLfTi-T_qof4k_88549kt_sEE1oeyq1YqQqtqxVEIVPQHwiz5WhNIErtIykvUVhl9-adm_Y8U_0sV35aJfBpn3Et6bi8_O-5kwbJGzx-uusVP8ibKgpGd9heLv8Bg1aicI1-Bf0k1idb2BgqLxRTnAPliiXoGs0IL5Xy0X7e0Fx4un1lT6dZU8PN52KWcLptyoUQIgvxOhzVCIn45eYPYxugnd6LlE66MXPo5eBPsgCuCuZ3dD4FFWEogmPntzUR"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Team Activity (Col 5) -->
+<div class="md:col-span-5 glass-panel rounded-2xl p-6 md:p-8 flex flex-col">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6">Activity Stream</h3>
+<div class="relative pl-6 flex-1 flex flex-col gap-6">
+<!-- Timeline line -->
+<div class="absolute left-[11px] top-2 bottom-2 w-[1px] bg-white/10"></div>
+<!-- Activity Item -->
+<div class="relative">
+<div class="absolute -left-[30px] top-1 w-4 h-4 rounded-full bg-primary-container border-[2px] border-secondary z-10"></div>
+<p class="font-body-md text-body-md text-on-surface"><span class="font-medium text-white">Sarah J.</span> merged PR #402</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant/50 mt-1">10 minutes ago</p>
+<div class="mt-2 p-3 rounded-lg bg-white/5 border-[0.5px] border-white/5 font-label-sm text-label-sm font-mono text-on-surface-variant">
+                                fix: authentication token refresh loop
+                            </div>
+</div>
+<!-- Activity Item -->
+<div class="relative">
+<div class="absolute -left-[30px] top-1 w-4 h-4 rounded-full bg-primary-container border-[2px] border-white/20 z-10"></div>
+<p class="font-body-md text-body-md text-on-surface"><span class="font-medium text-white">Mike K.</span> commented on PRJ-1055</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant/50 mt-1">2 hours ago</p>
+</div>
+<!-- Activity Item -->
+<div class="relative">
+<div class="absolute -left-[30px] top-1 w-4 h-4 rounded-full bg-primary-container border-[2px] border-white/20 z-10"></div>
+<p class="font-body-md text-body-md text-on-surface"><span class="font-medium text-white">Design Team</span> uploaded new assets</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant/50 mt-1">4 hours ago</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

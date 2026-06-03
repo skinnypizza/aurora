@@ -1,0 +1,28 @@
+{
+  "id": "SGE-1.6",
+  "title": "CRUD Lugares de Trabajo con PostGIS",
+  "priority": "Must",
+  "sp": 5,
+  "status": "Done",
+  "assignee": "JOS",
+  "sprint": 1,
+  "story": "CRUD de lugares con PostGIS implementado, incluyendo geocercas y consultas de proximidad.",
+  "subtasks": [
+    "Modelo LugarTrabajo con datos geoespaciales",
+    "DTOs con conversión de coordenadas",
+    "LugaresController CRUD",
+    "ST_DWithin para verificar geocerca",
+    "Búsqueda por proximidad"
+  ],
+  "ac": [
+    "Lugares con datos geoespaciales válidos",
+    "ST_DWithin funcional",
+    "Búsqueda por proximidad operativa"
+  ],
+  "deps": [
+    "SGE-1.1",
+    "SGE-1.3"
+  ],
+  "created": "2026-05-14T16:07:00.000Z",
+  "updated": "2026-05-14T16:07:00.000Z"
+}

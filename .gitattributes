@@ -1,0 +1,31 @@
+# Auto detect text files and set LF line endings
+* text=auto
+
+# JavaScript
+*.js text eol=lf
+*.mjs text eol=lf
+
+# HTML
+*.html text eol=lf
+
+# CSS
+*.css text eol=lf
+
+# JSON
+*.json text eol=lf
+
+# Markdown
+*.md text eol=lf
+
+# YAML
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Shell
+*.sh text eol=lf
+
+# Binary
+*.png binary
+*.ico binary
+*.jpg binary
+*.gif binary

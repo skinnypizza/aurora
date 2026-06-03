@@ -1,0 +1,23 @@
+{
+  "id": "SGE-3.11",
+  "title": "Tema oscuro/claro configurable",
+  "priority": "Could",
+  "sp": 2,
+  "status": "Backlog",
+  "assignee": "ETH",
+  "sprint": 3,
+  "story": "Tema configurable para adaptarse a condiciones de iluminación.",
+  "subtasks": [
+    "Implementar ThemeProvider en Flutter",
+    "Persistir preferencia de tema en SharedPreferences"
+  ],
+  "ac": [
+    "Tema oscuro/claro funcional",
+    "Preferencia persiste al recargar"
+  ],
+  "deps": [
+    "SGE-2.1"
+  ],
+  "created": "2026-05-14T16:07:00.000Z",
+  "updated": "2026-05-14T16:07:00.000Z"
+}

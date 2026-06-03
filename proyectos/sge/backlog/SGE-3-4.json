@@ -1,0 +1,28 @@
+{
+  "id": "SGE-3.4",
+  "title": "Soporte offline: caché local y sincronización",
+  "priority": "Must",
+  "sp": 5,
+  "status": "InProgress",
+  "assignee": "ALA",
+  "sprint": 3,
+  "story": "App funciona sin conexión con sincronización automática al recuperar señal.",
+  "subtasks": [
+    "Implementar base de datos local con sqflite o drift",
+    "Cachear datos de empleado, lugares y último dashboard",
+    "Almacenar ubicaciones pendientes de envío en cola local",
+    "Sincronizar ubicaciones encoladas cuando vuelva la conexión",
+    "Mostrar indicador de \"modo offline\" en la UI"
+  ],
+  "ac": [
+    "App muestra datos cacheados sin conexión",
+    "Ubicaciones se encolan y envían al reconectar",
+    "Indicador offline visible",
+    "Sin pérdida de datos al alternar conexión"
+  ],
+  "deps": [
+    "SGE-3.1"
+  ],
+  "created": "2026-05-14T16:07:00.000Z",
+  "updated": "2026-05-14T16:07:00.000Z"
+}

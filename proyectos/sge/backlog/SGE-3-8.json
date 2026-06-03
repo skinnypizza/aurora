@@ -1,0 +1,25 @@
+{
+  "id": "SGE-3.8",
+  "title": "Optimización de batería y datos en segundo plano",
+  "priority": "Should",
+  "sp": 3,
+  "status": "Backlog",
+  "assignee": "ALA",
+  "sprint": 3,
+  "story": "Reducir consumo de batería mientras se reporta ubicación en segundo plano.",
+  "subtasks": [
+    "Reducir frecuencia de envío a 60-120s en background",
+    "Implementar debounce: no enviar si ubicación no cambió significativamente",
+    "Comprimir payloads de ubicación antes de enviar",
+    "Probar consumo de batería en sesión de 4h"
+  ],
+  "ac": [
+    "Consumo de batería menor al 15% en 4h de uso",
+    "Datos móviles usan menos de 50MB en jornada de 8h"
+  ],
+  "deps": [
+    "SGE-3.2"
+  ],
+  "created": "2026-05-14T16:07:00.000Z",
+  "updated": "2026-05-14T16:07:00.000Z"
+}

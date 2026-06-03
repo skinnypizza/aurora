@@ -1,0 +1,30 @@
+{
+  "id": "SGE-3.3",
+  "title": "Notificaciones push vía Firebase Cloud Messaging",
+  "priority": "Must",
+  "sp": 5,
+  "status": "InProgress",
+  "assignee": "ALA",
+  "sprint": 3,
+  "story": "Notificaciones push al cruzar geocerca para acción inmediata.",
+  "subtasks": [
+    "Configurar proyecto Firebase y descargar google-services.json",
+    "Integrar firebase_messaging en Flutter",
+    "Implementar endpoint POST /api/notificaciones/registrar-dispositivo",
+    "Enviar notificaciones desde el backend al generar alerta",
+    "Manejar acción al tocar la notificación"
+  ],
+  "ac": [
+    "Notificación push recibida al cruzar geocerca",
+    "Al tocar notificación abre el detalle de la alerta",
+    "Dispositivo registrado correctamente en la API"
+  ],
+  "deps": [
+    "SGE-1.7",
+    "SGE-3.2"
+  ],
+  "created": "2026-05-14T16:07:00.000Z",
+  "updated": "2026-05-20T22:16:20.657Z",
+  "_daysInColumn": 0,
+  "_blocked": false
+}

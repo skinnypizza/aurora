@@ -1,0 +1,14 @@
+{
+  "projects": [
+    {
+      "id": "sge",
+      "title": "SGE — Sistema de Geolocalización de Empleados",
+      "created": "2026-05-14T16:07:00.000Z"
+    },
+    {
+      "id": "hoa",
+      "title": "hoa",
+      "created": "2026-06-02T11:50:13.813Z"
+    }
+  ]
+}

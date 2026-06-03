@@ -1,0 +1,30 @@
+{
+  "id": "SGE-2.3",
+  "title": "CRUD Empleados en Vue conectado a API real",
+  "priority": "Must",
+  "sp": 5,
+  "status": "Done",
+  "assignee": "ETH",
+  "sprint": 2,
+  "story": "Gestión de empleados desde Vue con datos reales contra la API.",
+  "subtasks": [
+    "Conectar lista de Empleados.vue con GET /api/admin/empleados",
+    "Implementar creación con POST /api/admin/empleados",
+    "Implementar edición con PUT /api/admin/empleados/{id}",
+    "Implementar toggle activo con PATCH /api/admin/empleados/{id}/estadoemp",
+    "Conectar cambio de lugar con PATCH /api/admin/empleados/{id}/lugar-trabajo",
+    "Agregar búsqueda y filtros"
+  ],
+  "ac": [
+    "Lista de empleados refleja datos reales de la BD",
+    "CRUD completo funcional",
+    "Cambio de lugar se refleja en tiempo real",
+    "Búsqueda por nombre y CI funcional"
+  ],
+  "deps": [
+    "SGE-1.5",
+    "SGE-2.1"
+  ],
+  "created": "2026-05-14T16:07:00.000Z",
+  "updated": "2026-05-14T16:07:00.000Z"
+}

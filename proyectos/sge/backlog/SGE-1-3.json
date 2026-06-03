@@ -1,0 +1,30 @@
+{
+  "id": "SGE-1.3",
+  "title": "Sistema de autenticación y autorización JWT",
+  "priority": "Must",
+  "sp": 8,
+  "status": "Done",
+  "assignee": "GER",
+  "sprint": 1,
+  "story": "Auth JWT implementado con login, roles y middleware de autorización.",
+  "subtasks": [
+    "AuthController: POST /api/auth/login",
+    "Tokens JWT con claims",
+    "Políticas de autorización por rol",
+    "Hash de contraseñas con SHA256",
+    "DTOs de autenticación",
+    "Middleware de validación"
+  ],
+  "ac": [
+    "Login retorna token JWT válido",
+    "Contraseñas hasheadas",
+    "Roles Admin y Empleado diferenciados",
+    "401 para peticiones sin token"
+  ],
+  "deps": [
+    "SGE-1.1",
+    "SGE-1.2"
+  ],
+  "created": "2026-05-14T16:07:00.000Z",
+  "updated": "2026-05-14T16:07:00.000Z"
+}

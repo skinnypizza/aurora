@@ -1,0 +1,30 @@
+{
+  "id": "SGE-2.4",
+  "title": "App Flutter: Login + Servicios API + Provider State",
+  "priority": "Must",
+  "sp": 8,
+  "status": "Done",
+  "assignee": "ALA",
+  "sprint": 2,
+  "story": "Login móvil con Flutter, JWT y Provider para gestión de estado global.",
+  "subtasks": [
+    "Scaffold proyecto Flutter con organización de carpetas",
+    "Configurar tema global (colores SGE: #1A5276, #FF6B00)",
+    "Implementar AuthService: POST /api/auth/login con almacenamiento local",
+    "Implementar ApiService singleton con JWT interceptor",
+    "Configurar Provider para estado global de autenticación",
+    "Diseñar pantalla de Login con validación de formulario",
+    "Implementar AuthGate: redirección automática"
+  ],
+  "ac": [
+    "Login funcional contra API real",
+    "Token se almacena en SharedPreferences",
+    "Al cerrar y abrir la app, mantiene sesión activa",
+    "Provider actualiza el estado correctamente"
+  ],
+  "deps": [
+    "SGE-1.3"
+  ],
+  "created": "2026-05-14T16:07:00.000Z",
+  "updated": "2026-05-14T16:07:00.000Z"
+}

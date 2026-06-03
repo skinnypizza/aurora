@@ -1,0 +1,26 @@
+{
+  "id": "SGE-1.4",
+  "title": "Infraestructura Cloud y entorno de desarrollo",
+  "priority": "Must",
+  "sp": 5,
+  "status": "Done",
+  "assignee": "JOS",
+  "sprint": 1,
+  "story": "Infraestructura cloud configurada con BD PostgreSQL remota y entorno de staging.",
+  "subtasks": [
+    "Instancia PostgreSQL cloud",
+    "PostGIS habilitado",
+    "Variables de entorno",
+    "Firewall y seguridad",
+    "Backups automáticos"
+  ],
+  "ac": [
+    "BD cloud accesible",
+    "Backups automáticos funcionando"
+  ],
+  "deps": [
+    "SGE-1.1"
+  ],
+  "created": "2026-05-14T16:07:00.000Z",
+  "updated": "2026-05-14T20:27:48.169Z"
+}

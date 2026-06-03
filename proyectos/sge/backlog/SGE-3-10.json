@@ -1,0 +1,26 @@
+{
+  "id": "SGE-3.10",
+  "title": "Pruebas de carga con 1000+ ubicaciones simultáneas",
+  "priority": "Could",
+  "sp": 3,
+  "status": "Backlog",
+  "assignee": "GER",
+  "sprint": 3,
+  "story": "Garantizar escalabilidad del sistema con 1000 empleados simultáneos.",
+  "subtasks": [
+    "Crear script de pruebas de carga con k6 o Artillery",
+    "Simular 1000+ ubicaciones concurrentes",
+    "Medir tiempo de respuesta promedio",
+    "Documentar límites y recomendar optimizaciones"
+  ],
+  "ac": [
+    "API responde en menos de 500ms con 1000 requests/s",
+    "Documento de capacidad del sistema generado"
+  ],
+  "deps": [
+    "SGE-1.7",
+    "SGE-2.2"
+  ],
+  "created": "2026-05-14T16:07:00.000Z",
+  "updated": "2026-05-14T16:07:00.000Z"
+}

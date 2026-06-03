@@ -1,0 +1,28 @@
+{
+  "id": "hoa",
+  "title": "hoa",
+  "ownerId": "local-user",
+  "description": "",
+  "techStack": [],
+  "status": "active",
+  "created": "2026-06-02T11:50:13.813Z",
+  "updated": "2026-06-03T01:58:47.360Z",
+  "currentSprint": 1,
+  "totalSprints": 4,
+  "wipLimits": {
+    "InProgress": 6,
+    "Review": 4
+  },
+  "localMembers": [
+    {
+      "id": "local-1780451917238-2to3",
+      "alias": "Jane",
+      "name": "AGENT",
+      "role": "AI Sub-Agent",
+      "color": "#8b5cf6",
+      "avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=local-1780451917238-2to3",
+      "isAI": true,
+      "created": "2026-06-03T01:58:37.238Z"
+    }
+  ]
+}

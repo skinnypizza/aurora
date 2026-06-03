@@ -1,0 +1,30 @@
+{
+  "id": "SGE-3.5",
+  "title": "Flutter: Mapa en vivo con ubicación de empleados",
+  "priority": "Must",
+  "sp": 8,
+  "status": "Backlog",
+  "assignee": "ALA",
+  "sprint": 3,
+  "story": "Mapa en vivo con todas las ubicaciones de empleados desde la app.",
+  "subtasks": [
+    "Integrar Mapbox GL o Google Maps en Flutter",
+    "Obtener ubicaciones con GET /api/ubicaciones/ultimas",
+    "Mostrar marcadores con colores según estado (dentro/fuera geocerca)",
+    "Actualizar marcadores en intervalo configurable (15s)",
+    "Tooltip con datos del empleado al hacer tap"
+  ],
+  "ac": [
+    "Mapa muestra todos los empleados activos",
+    "Actualización automática cada 15s",
+    "Tooltip funcional al tocar marcador"
+  ],
+  "deps": [
+    "SGE-3.1",
+    "SGE-3.2"
+  ],
+  "created": "2026-05-14T16:07:00.000Z",
+  "updated": "2026-05-20T22:08:24.769Z",
+  "_daysInColumn": 0,
+  "_blocked": false
+}

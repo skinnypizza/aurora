@@ -1,0 +1,63 @@
+{
+  "name": "Scrumban App",
+  "short_name": "Scrumban",
+  "description": "Gestión ágil de proyectos con tablero híbrido Scrum + Kanban. Planifica sprints, gestiona tu backlog y visualiza el progreso de tu equipo.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b1326",
+  "theme_color": "#6366f1",
+  "orientation": "any",
+  "lang": "es",
+  "dir": "ltr",
+  "scope": "/",
+  "categories": ["productivity", "project management", "business"],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/board.webp",
+      "sizes": "1280x720",
+      "type": "image/webp",
+      "label": "Vista del tablero Scrumban con columnas Backlog, To Do, In Progress, Review y Done"
+    },
+    {
+      "src": "/screenshots/backlog.webp",
+      "sizes": "1280x720",
+      "type": "image/webp",
+      "label": "Vista del backlog con historias de usuario priorizadas"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Nuevo Proyecto",
+      "short_name": "Nuevo",
+      "description": "Crear un nuevo proyecto",
+      "url": "/?action=new-project"
+    },
+    {
+      "name": "Nueva Historia",
+      "short_name": "Historia",
+      "description": "Agregar una nueva historia de usuario",
+      "url": "/?action=new-story"
+    }
+  ]
+}

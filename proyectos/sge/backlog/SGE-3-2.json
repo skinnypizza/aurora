@@ -1,0 +1,32 @@
+{
+  "id": "SGE-3.2",
+  "title": "Geolocalización en tiempo real con servicio en segundo plano",
+  "priority": "Must",
+  "sp": 8,
+  "status": "Todo",
+  "assignee": "ALA",
+  "sprint": 3,
+  "story": "GPS en segundo plano reportando ubicación a la API sin intervención del usuario.",
+  "subtasks": [
+    "Configurar geolocator/geolocation package en Flutter",
+    "Implementar servicio de localización en foreground",
+    "Implementar servicio en background con WorkManager (Android)",
+    "Enviar ubicación a POST /api/ubicaciones cada N segundos",
+    "Calcular distancia a geocercas localmente",
+    "Manejar permisos de ubicación (always, while in use)"
+  ],
+  "ac": [
+    "Ubicación se reporta cada 30s en foreground",
+    "Ubicación se reporta cada 60s en background",
+    "App funciona con permisos \"While in use\" y \"Always\"",
+    "Indicador GPS visible en la UI"
+  ],
+  "deps": [
+    "SGE-1.7",
+    "SGE-3.1"
+  ],
+  "created": "2026-05-14T16:07:00.000Z",
+  "updated": "2026-05-20T22:08:33.530Z",
+  "_daysInColumn": 0,
+  "_blocked": false
+}

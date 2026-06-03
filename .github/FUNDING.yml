@@ -1,0 +1,5 @@
+# Scrumban App — Funding Configuration
+
+github: [skinnypizza]
+open_collective: scrumban
+custom: ['https://scrumban.app/#pricing', 'https://buy.stripe.com/your_stripe_link']

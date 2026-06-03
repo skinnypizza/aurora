@@ -1,0 +1,25 @@
+{
+  "id": "SGE-3.9",
+  "title": "Internacionalización (i18n) — Multi-idioma",
+  "priority": "Should",
+  "sp": 3,
+  "status": "Backlog",
+  "assignee": "ETH",
+  "sprint": 3,
+  "story": "Soporte multi-idioma (ES/EN) en la app.",
+  "subtasks": [
+    "Configurar i18n en Flutter con flutter_localizations",
+    "Extraer todos los strings a archivos .arb",
+    "Implementar selector de idioma en PerfilScreen"
+  ],
+  "ac": [
+    "App traducible entre ES/EN",
+    "Selector de idioma funcional",
+    "Cadenas extraídas correctamente"
+  ],
+  "deps": [
+    "SGE-3.1"
+  ],
+  "created": "2026-05-14T16:07:00.000Z",
+  "updated": "2026-05-14T16:07:00.000Z"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "SGE-3.6",
+  "title": "Flutter: Reportes y vista de detalle por empleado",
+  "priority": "Must",
+  "sp": 5,
+  "status": "Backlog",
+  "assignee": "ALA",
+  "sprint": 3,
+  "story": "Reportes detallados desde la app móvil.",
+  "subtasks": [
+    "Implementar ReportesScreen con selector de fechas",
+    "Conectar GET /api/admin/reportes/asistencia por empleado",
+    "Mostrar tabla de asistencias con indicador dentro/fuera",
+    "Vista de detalle por empleado con historial"
+  ],
+  "ac": [
+    "Reportes por empleado funcionales",
+    "Selector de fechas operativo",
+    "Datos históricos visibles y filtrables"
+  ],
+  "deps": [
+    "SGE-3.1"
+  ],
+  "created": "2026-05-14T16:07:00.000Z",
+  "updated": "2026-05-20T22:08:25.949Z",
+  "_daysInColumn": 0,
+  "_blocked": false
+}

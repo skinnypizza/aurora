@@ -1,0 +1,29 @@
+{
+  "id": "SGE-1.7",
+  "title": "Registro de Ubicaciones en tiempo real",
+  "priority": "Must",
+  "sp": 5,
+  "status": "Done",
+  "assignee": "GER",
+  "sprint": 1,
+  "story": "Endpoint de ubicaciones implementado con almacenamiento geoespacial y consultas en tiempo real.",
+  "subtasks": [
+    "Modelo Ubicacion con coordenadas",
+    "UbicacionesController: POST, GET /ultimas, GET /empleado/{id}",
+    "Almacenamiento con NetTopologySuite",
+    "Validaciones de coordenadas y autenticación",
+    "DTOs de ubicación"
+  ],
+  "ac": [
+    "Ubicaciones registradas con datos geoespaciales",
+    "Historial consultable por fecha",
+    "Última ubicación en menos de 200ms"
+  ],
+  "deps": [
+    "SGE-1.1",
+    "SGE-1.3",
+    "SGE-1.6"
+  ],
+  "created": "2026-05-14T16:07:00.000Z",
+  "updated": "2026-05-14T16:07:00.000Z"
+}

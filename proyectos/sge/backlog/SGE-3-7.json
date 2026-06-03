@@ -1,0 +1,27 @@
+{
+  "id": "SGE-3.7",
+  "title": "Vue: Panel administración avanzado + exportación de datos",
+  "priority": "Must",
+  "sp": 5,
+  "status": "InProgress",
+  "assignee": "ETH",
+  "sprint": 3,
+  "story": "Panel avanzado con exportación de datos y filtros potentes.",
+  "subtasks": [
+    "Agregar exportación a Excel/PDF en Reportes.vue",
+    "Implementar filtros combinados (fecha + empleado + lugar)",
+    "Agregar gráficos de tendencias (Chart.js) en Dashboard",
+    "Agregar selector de columnas visibles en tablas"
+  ],
+  "ac": [
+    "Exportación Excel/PDF genera archivos válidos",
+    "Gráficos de tendencias funcionales",
+    "Filtros combinados funcionan correctamente"
+  ],
+  "deps": [
+    "SGE-2.2",
+    "SGE-2.3"
+  ],
+  "created": "2026-05-14T16:07:00.000Z",
+  "updated": "2026-05-14T20:17:11.605Z"
+}

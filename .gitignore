@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temp files
+temp_*
+tmp/
+*.tmp
+
+# Build output
+dist/
+build/
+release/
+*.asar
+
+# Project specific
+server_backup.js
+scrumban_app.html
+proyectos/*/docs/
+
+# Stitch design assets (reference only)
+stitch_scrumban_app_minimalist_redesign/

@@ -1,0 +1,24 @@
+{
+  "id": "SGE-1.2",
+  "title": "Config. proyecto ASP.NET Core y arquitectura base",
+  "priority": "Must",
+  "sp": 5,
+  "status": "Done",
+  "assignee": "GER",
+  "sprint": 1,
+  "story": "Proyecto .NET configurado con dependencias, middleware y estructura de carpetas.",
+  "subtasks": [
+    "Proyecto .NET 9",
+    "Paquetes NuGet: EF Core, Npgsql, JWT, Swagger",
+    "Configuración Program.cs",
+    "DbContext con NetTopologySuite",
+    "CORS configurado"
+  ],
+  "ac": [
+    "Proyecto compila y ejecuta",
+    "Swagger accesible en /swagger"
+  ],
+  "deps": [],
+  "created": "2026-05-14T16:07:00.000Z",
+  "updated": "2026-05-14T16:07:00.000Z"
+}

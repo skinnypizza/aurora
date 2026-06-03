@@ -1,0 +1,27 @@
+{
+  "id": "SGE-2.7",
+  "title": "Flutter: Dashboard + Login completos",
+  "priority": "Must",
+  "sp": 8,
+  "status": "Done",
+  "assignee": "ALA",
+  "sprint": 2,
+  "story": "Dashboard y pantallas base de Flutter funcionales.",
+  "subtasks": [
+    "Implementar Dashboard screen con tarjetas de estadísticas personales",
+    "Conectar con GET /api/ubicaciones/mi-dashboard",
+    "Agregar bottom navigation con tabs",
+    "Implementar navegación entre pantallas",
+    "Agregar indicadores de carga y manejo de errores"
+  ],
+  "ac": [
+    "Dashboard muestra estadísticas personales reales",
+    "Bottom navigation funcional",
+    "Navegación fluida entre pantallas"
+  ],
+  "deps": [
+    "SGE-2.4"
+  ],
+  "created": "2026-05-14T16:07:00.000Z",
+  "updated": "2026-05-14T16:07:00.000Z"
+}

@@ -1,0 +1,20 @@
+{
+  "id": 3,
+  "name": "Sprint 3",
+  "objective": "App Móvil Completa + Features Avanzados",
+  "durationWeeks": 2,
+  "capacityHours": 200,
+  "velocity": 48,
+  "startDate": "2026-05-28",
+  "endDate": "2026-06-10",
+  "stories": [
+    "SGE-3.1",
+    "SGE-3.2",
+    "SGE-3.3",
+    "SGE-3.4",
+    "SGE-3.5",
+    "SGE-3.6",
+    "SGE-3.7"
+  ],
+  "retrospective": ""
+}

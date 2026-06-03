@@ -1,0 +1,20 @@
+{
+  "id": 2,
+  "name": "Sprint 2",
+  "objective": "Frontend-Backend + Flutter Start",
+  "durationWeeks": 2,
+  "capacityHours": 180,
+  "velocity": 45,
+  "startDate": "2026-05-14",
+  "endDate": "2026-05-27",
+  "stories": [
+    "SGE-2.1",
+    "SGE-2.2",
+    "SGE-2.3",
+    "SGE-2.4",
+    "SGE-2.5",
+    "SGE-2.6",
+    "SGE-2.7"
+  ],
+  "retrospective": ""
+}

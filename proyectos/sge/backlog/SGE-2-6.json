@@ -1,0 +1,29 @@
+{
+  "id": "SGE-2.6",
+  "title": "Pantalla Lugares en Vue con mapa y geocercas",
+  "priority": "Must",
+  "sp": 5,
+  "status": "Done",
+  "assignee": "ETH",
+  "sprint": 2,
+  "story": "Gestión de lugares con Mapbox y geocercas desde Vue.",
+  "subtasks": [
+    "Conectar Lugares.vue con GET /api/admin/lugares",
+    "Implementar mapa con Mapbox mostrando todos los lugares",
+    "Mostrar geocercas como círculos en el mapa",
+    "Implementar creación/edición de lugares con coordenadas",
+    "Implementar eliminación lógica de lugares",
+    "Mostrar empleados asignados a cada lugar"
+  ],
+  "ac": [
+    "Lugares se muestran en el mapa con sus geocercas",
+    "CRUD de lugares funcional contra API real",
+    "Al crear/editar un lugar, la geocerca se actualiza en el mapa"
+  ],
+  "deps": [
+    "SGE-1.6",
+    "SGE-2.1"
+  ],
+  "created": "2026-05-14T16:07:00.000Z",
+  "updated": "2026-05-14T16:07:00.000Z"
+}

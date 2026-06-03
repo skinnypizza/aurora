@@ -1,0 +1,28 @@
+# Source control
+.git
+.gitignore
+.gitattributes
+
+# Docs
+README*.md
+README_AI.md
+AUDITORIA.md
+REDESIGN_SPEC.md
+TEMPLATES.md
+
+# Dev / lint
+eslint.config.mjs
+node_modules/.cache
+
+# Scripts not needed at runtime
+fix-ids.js
+import_sge.js
+migrate.js
+write_stories.js
+
+# Environment
+.env
+.env.example
+
+# Stitch redesign assets
+stitch_scrumban_app_minimalist_redesign

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AgileFlow - Métricas y Analíticas</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@200;400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#050505",
+                        "secondary-fixed-dim": "#c0c1ff",
+                        "error-container": "#93000a",
+                        "on-surface": "#e0e3e5",
+                        "inverse-primary": "#5f5e5e",
+                        "tertiary-container": "#040506",
+                        "surface": "#101415",
+                        "on-surface-variant": "#c4c7c7",
+                        "on-secondary-fixed": "#07006c",
+                        "inverse-surface": "#e0e3e5",
+                        "on-background": "#e0e3e5",
+                        "primary": "#c9c6c5",
+                        "secondary": "#c0c1ff",
+                        "on-tertiary-fixed": "#1a1c1e",
+                        "on-error": "#690005",
+                        "surface-container-highest": "#323537",
+                        "surface-container": "#1d2022",
+                        "on-primary-fixed": "#1c1b1b",
+                        "on-error-container": "#ffdad6",
+                        "background": "#101415",
+                        "on-primary-fixed-variant": "#474646",
+                        "surface-bright": "#363a3b",
+                        "surface-dim": "#101415",
+                        "surface-container-low": "#191c1e",
+                        "on-tertiary": "#2f3133",
+                        "on-tertiary-container": "#76777a",
+                        "inverse-on-surface": "#2d3133",
+                        "on-primary": "#313030",
+                        "secondary-fixed": "#e1e0ff",
+                        "on-secondary-fixed-variant": "#2f2ebe",
+                        "secondary-container": "#3131c0",
+                        "primary-fixed-dim": "#c9c6c5",
+                        "on-secondary-container": "#b0b2ff",
+                        "tertiary-fixed-dim": "#c6c6c9",
+                        "surface-tint": "#c9c6c5",
+                        "outline-variant": "#444748",
+                        "tertiary-fixed": "#e2e2e5",
+                        "surface-variant": "#323537",
+                        "surface-container-lowest": "#0b0f10",
+                        "tertiary": "#c6c6c9",
+                        "on-primary-container": "#797777",
+                        "outline": "#8e9192",
+                        "on-secondary": "#1000a9",
+                        "primary-fixed": "#e5e2e1",
+                        "surface-container-high": "#272a2c",
+                        "on-tertiary-fixed-variant": "#454749",
+                        "error": "#ffb4ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin-desktop": "64px",
+                        "unit": "8px",
+                        "container-max": "1200px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Geist"],
+                        "label-md": ["Geist"],
+                        "headline-lg-mobile": ["Geist"],
+                        "display-lg": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "body-md": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "500" }],
+                        "label-md": ["14px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "200" }],
+                        "label-sm": ["12px", { "lineHeight": "1.0", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom Glassmorphism Utilities */
+        .glass-panel {
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 0.5px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-panel-active {
+            background-color: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(192, 193, 255, 0.3); /* Secondary tint */
+            box-shadow: inset 0 0 15px rgba(192, 193, 255, 0.1);
+        }
+        
+        /* Thin Scrollbar for panels */
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex antialiased selection:bg-secondary/30 selection:text-secondary-fixed">
+<!-- SideNavBar (Shared Component) -->
+<nav class="bg-white/5 dark:bg-primary-container/5 backdrop-blur-xl fixed left-0 top-0 h-full w-20 hover:w-64 transition-all duration-500 rounded-r-xl border-r-[0.5px] border-white/10 dark:border-white/5 shadow-2xl flex flex-col py-unit z-50 group overflow-hidden">
+<!-- Header -->
+<div class="px-4 mt-4 mb-8 flex items-center h-12">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center shrink-0 border border-secondary/20 shadow-[inset_0_0_10px_rgba(192,193,255,0.2)]">
+<span class="font-headline-md text-headline-md text-on-secondary-container">A</span>
+</div>
+<div class="ml-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+<h1 class="font-display-lg text-display-lg font-light tracking-tighter text-on-surface text-[24px] leading-none">AgileFlow</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Premium Project Hub</p>
+</div>
+</div>
+<!-- Tabs -->
+<ul class="flex-1 space-y-2 px-3">
+<!-- Active Tab: Dashboard (Metrics) -->
+<li>
+<a class="flex items-center px-3 py-3 rounded-lg text-secondary dark:text-secondary-fixed bg-secondary-container/10 border-r-2 border-secondary transition-all duration-300 ease-in-out relative" href="#">
+<span class="material-symbols-outlined shrink-0" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="ml-4 font-body-md text-body-md tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">Dashboard</span>
+<!-- Inner Glow Indicator -->
+<div class="absolute inset-0 rounded-lg shadow-[inset_0_0_12px_rgba(192,193,255,0.15)] pointer-events-none"></div>
+</a>
+</li>
+<!-- Inactive Tabs -->
+<li>
+<a class="flex items-center px-3 py-3 rounded-lg text-on-surface-variant/60 dark:text-tertiary-fixed-dim/60 hover:bg-white/10 dark:hover:bg-white/5 hover:text-on-surface transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined shrink-0">tactic</span>
+<span class="ml-4 font-body-md text-body-md tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">Projects</span>
+</a>
+</li>
+<li>
+<a class="flex items-center px-3 py-3 rounded-lg text-on-surface-variant/60 dark:text-tertiary-fixed-dim/60 hover:bg-white/10 dark:hover:bg-white/5 hover:text-on-surface transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined shrink-0">assignment_turned_in</span>
+<span class="ml-4 font-body-md text-body-md tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">Tasks</span>
+</a>
+</li>
+<li>
+<a class="flex items-center px-3 py-3 rounded-lg text-on-surface-variant/60 dark:text-tertiary-fixed-dim/60 hover:bg-white/10 dark:hover:bg-white/5 hover:text-on-surface transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined shrink-0">group</span>
+<span class="ml-4 font-body-md text-body-md tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">Team</span>
+</a>
+</li>
+<li>
+<a class="flex items-center px-3 py-3 rounded-lg text-on-surface-variant/60 dark:text-tertiary-fixed-dim/60 hover:bg-white/10 dark:hover:bg-white/5 hover:text-on-surface transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined shrink-0">settings</span>
+<span class="ml-4 font-body-md text-body-md tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">Settings</span>
+</a>
+</li>
+</ul>
+<!-- CTA -->
+<div class="px-4 mb-4">
+<button class="w-full bg-secondary/10 hover:bg-secondary/20 text-secondary border-t border-secondary/30 rounded-lg py-3 flex items-center justify-center transition-colors duration-300">
+<span class="material-symbols-outlined shrink-0 opacity-100 group-hover:opacity-0 absolute transition-opacity duration-300">add</span>
+<span class="font-label-md text-label-md uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">New Sprint</span>
+</button>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 ml-20 flex flex-col min-h-screen relative">
+<!-- Ambient Background Glows -->
+<div class="absolute top-0 left-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
+<div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px] pointer-events-none z-0"></div>
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface/30 dark:bg-background/30 backdrop-blur-2xl fixed top-0 right-0 w-[calc(100%-5rem)] h-16 border-b-[0.5px] border-white/10 dark:border-white/5 flex justify-between items-center px-gutter z-40">
+<!-- Breadcrumb / Context -->
+<div class="flex items-center space-x-2 text-on-surface-variant">
+<span class="font-label-md text-label-md uppercase tracking-[0.2em]">AgileFlow</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="font-label-md text-label-md uppercase tracking-[0.2em] text-secondary">Analíticas</span>
+</div>
+<div class="flex items-center space-x-6">
+<!-- Search -->
+<div class="relative hidden md:block group">
+<span class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-secondary transition-colors">search</span>
+<input class="bg-transparent border-b-[0.5px] border-white/20 text-on-surface font-body-md text-body-md pl-8 pr-4 py-1 w-64 focus:outline-none focus:border-secondary transition-all placeholder:text-on-surface-variant/50" placeholder="Buscar métricas..." type="text"/>
+</div>
+<!-- Actions -->
+<button class="text-on-surface-variant dark:text-tertiary hover:opacity-80 transition-opacity hover:scale-95 duration-150 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-secondary rounded-full"></span>
+</button>
+<button class="text-on-surface-variant dark:text-tertiary hover:opacity-80 transition-opacity hover:scale-95 duration-150">
+<span class="material-symbols-outlined">history</span>
+</button>
+<!-- Profile Avatar -->
+<div class="w-8 h-8 rounded-full border border-white/20 overflow-hidden cursor-pointer hover:border-secondary transition-colors">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a team lead looking forward, slightly angled, softly lit against a minimalist dark obsidian background, fitting the premium aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7PI--8bwBBMIr15Z_02NuS8mrbaiXMCMhP4Klz1Aib4dcI_FP6RVLOkKzEY7i6tHn7K2dUhdJeGVk5cNDvaG4PoIMnUAMoNFPkT-URRIWDEhmm8wvF3Cahr8rH0_3F87P-73TVhsSaPriUQQfmnYzoSlxwcVKj5jpmUyaU4yQV2r3FyGS6ED-O_Vc3dKaEOMVag_mhH5TipuNTD-HedQyy6p3ciz-Sf_G8nSd6IjxKT4r_ak3GC5kMjtUD_ycPN0wo1aCxeiI1bho"/>
+</div>
+</div>
+</header>
+<!-- Canvas Area -->
+<main class="flex-1 mt-16 p-margin-mobile md:p-margin-desktop space-y-gutter relative z-10">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+<div>
+<h2 class="font-display-lg text-display-lg font-light tracking-tighter text-on-surface mb-2">Salud del Proyecto</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Resumen ejecutivo del Sprint actual: <span class="text-secondary">Titanium Alpha</span></p>
+</div>
+<!-- Date Range Pill -->
+<div class="inline-flex items-center bg-white/5 backdrop-blur-md border-[0.5px] border-white/10 rounded-full px-4 py-2 self-start md:self-auto">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant mr-2">calendar_today</span>
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-widest">Oct 12 - Oct 26</span>
+</div>
+</div>
+<!-- Dashboard Grid (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Exec Summary Cards (Row 1) -->
+<!-- Card 1: Health Score -->
+<div class="col-span-1 md:col-span-4 glass-panel-active rounded-xl p-6 flex flex-col relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-40 transition-opacity">
+<span class="material-symbols-outlined text-[64px] text-secondary">monitor_heart</span>
+</div>
+<span class="font-label-md text-label-md uppercase tracking-[0.2em] text-on-surface-variant mb-4">Índice de Salud</span>
+<div class="flex items-baseline gap-2 mt-auto">
+<span class="font-display-lg text-display-lg font-light text-on-surface">94</span>
+<span class="font-body-md text-body-md text-secondary">%</span>
+</div>
+<div class="mt-4 h-1 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[94%] rounded-full shadow-[0_0_10px_rgba(192,193,255,0.8)]"></div>
+</div>
+</div>
+<!-- Card 2: Velocity -->
+<div class="col-span-1 md:col-span-4 glass-panel rounded-xl p-6 flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-md text-label-md uppercase tracking-[0.2em] text-on-surface-variant">Velocidad Actual</span>
+<span class="material-symbols-outlined text-primary">speed</span>
+</div>
+<div class="flex items-baseline gap-2 mt-auto">
+<span class="font-display-lg text-display-lg font-light text-on-surface">48</span>
+<span class="font-body-md text-body-md text-on-surface-variant">pts</span>
+</div>
+<p class="font-label-sm text-label-sm text-secondary mt-2 flex items-center">
+<span class="material-symbols-outlined text-[14px] mr-1">trending_up</span> +12% vs Sprint anterior
+                    </p>
+</div>
+<!-- Card 3: Blockers -->
+<div class="col-span-1 md:col-span-4 glass-panel rounded-xl p-6 flex flex-col border-error/20">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-md text-label-md uppercase tracking-[0.2em] text-on-surface-variant">Bloqueos Activos</span>
+<span class="material-symbols-outlined text-error">warning</span>
+</div>
+<div class="flex items-baseline gap-2 mt-auto">
+<span class="font-display-lg text-display-lg font-light text-error">2</span>
+<span class="font-body-md text-body-md text-on-surface-variant">tareas</span>
+</div>
+<div class="mt-4 flex gap-2">
+<span class="px-2 py-1 bg-error/10 border border-error/20 rounded-full font-label-sm text-label-sm text-error uppercase">API-402</span>
+<span class="px-2 py-1 bg-white/5 border border-white/10 rounded-full font-label-sm text-label-sm text-on-surface-variant uppercase">UI-118</span>
+</div>
+</div>
+<!-- Main Chart Area (Row 2) -->
+<!-- Burndown Chart -->
+<div class="col-span-1 md:col-span-8 glass-panel rounded-xl p-6 min-h-[400px] flex flex-col relative">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md font-medium text-on-surface">Burndown Avanzado</h3>
+<div class="flex gap-2">
+<button class="px-3 py-1 glass-panel rounded font-label-sm text-label-sm uppercase hover:bg-white/10 transition">Ideal</button>
+<button class="px-3 py-1 bg-secondary/20 border-[0.5px] border-secondary/40 text-secondary rounded font-label-sm text-label-sm uppercase shadow-[inset_0_1px_0_0_rgba(192,193,255,0.5)]">Real</button>
+</div>
+</div>
+<!-- Abstract Chart Representation using Gradients/Lines to fit the aesthetic -->
+<div class="flex-1 relative mt-4 border-l border-b border-white/10 flex items-end">
+<!-- Y-Axis labels -->
+<div class="absolute -left-8 top-0 bottom-0 flex flex-col justify-between font-label-sm text-label-sm text-on-surface-variant/50 py-2">
+<span>60</span><span>40</span><span>20</span><span>0</span>
+</div>
+<!-- Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none">
+<div class="w-full h-px bg-white/5"></div>
+<div class="w-full h-px bg-white/5"></div>
+<div class="w-full h-px bg-white/5"></div>
+<div class="w-full h-px transparent"></div>
+</div>
+<!-- Data Lines (CSS Simulated) -->
+<!-- Ideal Line -->
+<svg class="absolute inset-0 h-full w-full" preserveaspectratio="none">
+<line stroke="rgba(255,255,255,0.1)" stroke-dasharray="8 8" stroke-width="2" x1="0" x2="100%" y1="10%" y2="100%"></line>
+</svg>
+<!-- Actual Line (Glowing) -->
+<svg class="absolute inset-0 h-full w-full drop-shadow-[0_0_8px_rgba(192,193,255,0.6)]" preserveaspectratio="none">
+<path class="text-secondary" d="M 0 10% L 20% 15% L 40% 35% L 60% 40% L 80% 70% L 90% 75%" fill="none" stroke="currentColor" stroke-width="3"></path>
+<!-- Fill Area -->
+<path d="M 0 10% L 20% 15% L 40% 35% L 60% 40% L 80% 70% L 90% 75% L 90% 100% L 0 100% Z" fill="url(#grad)" opacity="0.1"></path>
+<defs>
+<lineargradient id="grad" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#c0c1ff" stop-opacity="1"></stop>
+<stop offset="100%" stop-color="#c0c1ff" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<!-- Current Point Indicator -->
+<circle class="fill-surface stroke-secondary stroke-[3px]" cx="90%" cy="75%" r="6"></circle>
+</svg>
+<!-- X-Axis labels -->
+<div class="absolute -bottom-8 left-0 right-0 flex justify-between font-label-sm text-label-sm text-on-surface-variant/50 px-2">
+<span>Lun</span><span>Mié</span><span>Vie</span><span>Mar</span><span>Jue</span>
+</div>
+</div>
+</div>
+<!-- Cycle Time -->
+<div class="col-span-1 md:col-span-4 glass-panel rounded-xl p-6 flex flex-col">
+<h3 class="font-headline-md text-headline-md font-medium text-on-surface mb-6">Tiempo de Ciclo</h3>
+<div class="flex-1 flex flex-col justify-center items-center relative">
+<!-- Abstract Radial Gauge -->
+<div class="w-48 h-48 rounded-full border-[0.5px] border-white/10 flex items-center justify-center relative shadow-[inset_0_0_30px_rgba(255,255,255,0.02)]">
+<svg class="absolute inset-0 w-full h-full -rotate-90" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="46" stroke="rgba(255,255,255,0.05)" stroke-width="2"></circle>
+<circle class="drop-shadow-[0_0_4px_rgba(192,193,255,0.5)]" cx="50" cy="50" fill="none" r="46" stroke="#c0c1ff" stroke-dasharray="289" stroke-dashoffset="100" stroke-width="4"></circle>
+</svg>
+<div class="text-center">
+<span class="font-display-lg text-display-lg font-light text-on-surface block leading-none">3.2</span>
+<span class="font-label-md text-label-md uppercase tracking-widest text-on-surface-variant">Días</span>
+</div>
+</div>
+</div>
+<div class="mt-6 space-y-3">
+<div class="flex justify-between items-center text-sm">
+<span class="font-body-md text-body-md text-on-surface-variant">Tiempo de Espera</span>
+<span class="font-body-md text-body-md text-on-surface">1.1 d</span>
+</div>
+<div class="w-full h-px bg-white/5"></div>
+<div class="flex justify-between items-center text-sm">
+<span class="font-body-md text-body-md text-on-surface-variant">Tiempo de Trabajo</span>
+<span class="font-body-md text-body-md text-secondary">2.1 d</span>
+</div>
+</div>
+</div>
+<!-- Workload Distribution (Row 3) -->
+<div class="col-span-1 md:col-span-6 glass-panel rounded-xl p-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md font-medium text-on-surface">Carga de Trabajo</h3>
+<span class="material-symbols-outlined text-on-surface-variant">more_horiz</span>
+</div>
+<div class="space-y-6">
+<!-- Member 1 -->
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden shrink-0">
+<img alt="Dev Profile" class="w-full h-full object-cover" data-alt="A cinematic portrait of a software engineer, dark atmospheric lighting, looking focused, against an obsidian glass patterned background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYUFS4ZRPOl_UXk3EHgYQxIHaPxDFvvgyO7SJZcQn78drN8tXbPa9sCwgnD2DCD9eaSq6Yw20bflFnY_SGJ7d1FMfvi4MbJ7BPUwJ7piyR8ThcnB8Mj2qZl0s9ITGDdrRqlHfpBxjDnrpHBLvPQUFLyLiSrJnYZmv3RWqpJmq0OQdcCpjvN6iM-TYSVqX7tDFCwbE2DX5kx8HSWW8ROislWjxrDAckGNC0fZ-uq7rrEdL487f0xpqe4vlRUzJ6Z3QkJrBq826goGks"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between mb-1">
+<span class="font-body-md text-body-md text-on-surface">Elena R.</span>
+<span class="font-label-sm text-label-sm text-secondary">85%</span>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[85%] rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Member 2 -->
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden shrink-0">
+<img alt="Dev Profile" class="w-full h-full object-cover" data-alt="A portrait of a male designer with glasses, soft rim light illuminating his profile, moody dark background fitting a premium tech dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5Lq9Lk8e3vAjwbhyMIHWiyFaPxUuSkw-NowZKh6ISjrawOuD7JajFTyvuEEQKzcXgxm_ReyFs-uSp6m0CAuCYhPgG9TYJsZidxXgX_bKXkgxPTWiuJ8TPKxBLMWwMvXROSOh_TI5BjIkYabeLsXyRn3T6y_6FsdpVVYyipKSjk-ZlvGGL6LByDStgSP20aLAAC1ZERFhiBWfK08GRLJWOxpc2mTpjbGBOQQKgjJukB_qVCtQ-4HJRX-weBBQP7u1zeU8ez74S2Uou"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between mb-1">
+<span class="font-body-md text-body-md text-on-surface">Marcus T.</span>
+<span class="font-label-sm text-label-sm text-on-surface">60%</span>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[60%] rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Member 3 (Overloaded) -->
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden shrink-0">
+<img alt="Dev Profile" class="w-full h-full object-cover" data-alt="A sharp, high-contrast portrait of a female developer, looking slightly stressed but determined, dramatically lit in a dark studio environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdm-7VZd_NAUfp9uyPVJcZvSJmITQ3g9IpsjR1QuAsmOv7cu12qVCk6XLmnQYZ_11jinx-5NjwKhes0-MkCzWWP6mrmw9gH-ZYqHPJB7E_wrEpYZUiA8UlO4YFLE2aQUcYfPpy9xE5SZvqVY9RNFCkKtZBsXUESuQq9Vuc6ULpVldCyBAtTDOuDNB_e3ePEcc-xwzuctCEbIngUwfzsjqDiGehG3FLjqGzGIDRC2kgmFFGXcsXxdpRZxNH7hK7sFal8IIgmkz60esX"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between mb-1">
+<span class="font-body-md text-body-md text-on-surface">Sarah J.</span>
+<span class="font-label-sm text-label-sm text-error">110%</span>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-error w-[100%] rounded-full shadow-[0_0_8px_rgba(255,180,171,0.5)]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Velocity Trend -->
+<div class="col-span-1 md:col-span-6 glass-panel rounded-xl p-6 flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md font-medium text-on-surface">Historial de Velocidad</h3>
+<span class="material-symbols-outlined text-on-surface-variant">bar_chart</span>
+</div>
+<div class="flex-1 flex items-end gap-4 mt-4 h-48">
+<!-- Bars -->
+<div class="flex-1 flex flex-col items-center group">
+<div class="w-full bg-white/10 group-hover:bg-white/20 transition-colors rounded-t-sm h-[60%] relative"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-2">S1</span>
+</div>
+<div class="flex-1 flex flex-col items-center group">
+<div class="w-full bg-white/10 group-hover:bg-white/20 transition-colors rounded-t-sm h-[75%] relative"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-2">S2</span>
+</div>
+<div class="flex-1 flex flex-col items-center group">
+<div class="w-full bg-white/10 group-hover:bg-white/20 transition-colors rounded-t-sm h-[65%] relative"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-2">S3</span>
+</div>
+<div class="flex-1 flex flex-col items-center group">
+<div class="w-full bg-secondary/80 rounded-t-sm h-[90%] relative shadow-[0_0_15px_rgba(192,193,255,0.3)]">
+<!-- Inner light catch -->
+<div class="absolute top-0 left-0 right-0 h-[1px] bg-white/50"></div>
+</div>
+<span class="font-label-sm text-label-sm text-secondary mt-2">S4</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

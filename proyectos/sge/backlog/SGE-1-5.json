@@ -1,0 +1,29 @@
+{
+  "id": "SGE-1.5",
+  "title": "CRUD completo de Empleados (Controller + DTOs)",
+  "priority": "Must",
+  "sp": 5,
+  "status": "Done",
+  "assignee": "GER",
+  "sprint": 1,
+  "story": "CRUD de empleados implementado con todos los endpoints y validaciones.",
+  "subtasks": [
+    "Modelo Empleado completo",
+    "DTOs de creación/actualización/respuesta",
+    "EmpleadosController: GET, POST, PUT, PATCH",
+    "Validaciones con DataAnnotations",
+    "Manejo de errores HTTP estandarizado"
+  ],
+  "ac": [
+    "5 endpoints CRUD funcionales",
+    "Solo Admin puede crear/eliminar",
+    "Validaciones rechazan datos inválidos"
+  ],
+  "deps": [
+    "SGE-1.1",
+    "SGE-1.2",
+    "SGE-1.3"
+  ],
+  "created": "2026-05-14T16:07:00.000Z",
+  "updated": "2026-05-14T16:07:00.000Z"
+}

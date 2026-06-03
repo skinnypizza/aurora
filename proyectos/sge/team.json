@@ -1,0 +1,8 @@
+{
+  "members": [
+    { "alias": "GER", "name": "Gerald Aquise Illanes", "role": "Jefe de Proyecto / Backend Lead", "spPerSprint": 10 },
+    { "alias": "JOS", "name": "Josue Ramos Zeballos", "role": "DBA / DevOps", "spPerSprint": 8 },
+    { "alias": "ALA", "name": "Alan Aguilar Morales", "role": "Desarrollador Mobile (Flutter)", "spPerSprint": 12 },
+    { "alias": "ETH", "name": "Eithan Cardenas Luna", "role": "Frontend Developer (Vue)", "spPerSprint": 15 }
+  ]
+}

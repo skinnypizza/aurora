@@ -1,0 +1,7 @@
+# Scrumban App - Robots.txt
+# Permitir todos los crawlers
+
+User-agent: *
+Allow: /
+
+Sitemap: https://app.tudominio.com/sitemap.xml
