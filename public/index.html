@@ -51,6 +51,24 @@
         <button class="btn-new-project" onclick="showNewProjectModal()">
           <span class="icon">+</span> Nuevo Proyecto
         </button>
+
+        <div class="nav-label" style="margin-top:auto;padding-top:16px">COMUNIDAD</div>
+        <div class="project-item community-item" style="cursor:pointer;padding:6px 0" onclick="showFeedbackModal()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span class="info"><span class="name" style="font-size:12px">Enviar Feedback</span></span>
+        </div>
+        <div class="project-item community-item" style="cursor:pointer;padding:6px 0" onclick="showChangelog()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l1.5 4L17 4l-2 4 4-1-3 4 5 2-5 2 3 4-4-1 2 4-4-1.5L12 22l-1.5-4L7 20l2-4-4 1 3-4-5-2 5-2-3-4 4 1-2-4 4 1.5L12 2z"/></svg>
+          <span class="info"><span class="name" style="font-size:12px">Novedades</span></span>
+        </div>
+        <div class="project-item community-item" style="cursor:pointer;padding:6px 0" onclick="showShareModal()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          <span class="info"><span class="name" style="font-size:12px">Compartir</span></span>
+        </div>
+        <div class="project-item community-item" style="cursor:pointer;padding:6px 0" onclick="showNewsletterModal()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+          <span class="info"><span class="name" style="font-size:12px">Newsletter</span></span>
+        </div>
       </div>
       
       <div class="sidebar-footer">
@@ -166,6 +184,12 @@
   <script src="js/icons.js"></script>
   <script src="js/avatar.js"></script>
   <script src="js/subscription.js"></script>
+  <script src="js/newsletter.js"></script>
+  <script src="js/feedback.js"></script>
+  <script src="js/changelog.js"></script>
+  <script src="js/sharing.js"></script>
+  <script src="js/early-adopter.js"></script>
+  <script src="js/pricing.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

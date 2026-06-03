@@ -4,267 +4,317 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Scrumban — Gestión de proyectos híbrida para equipos LATAM</title>
-  <meta name="description" content="Scrumban es una herramienta de gestión de proyectos híbrida (Scrum + Kanban) en español. Ligera, sin servidor, con IA integrada. Ideal para freelancers, startups y equipos pequeños en LATAM.">
-  <meta property="og:title" content="Scrumban — Gestión de proyectos híbrida para equipos LATAM">
-  <meta property="og:description" content="Scrumban: Scrum + Kanban en español. Sin servidor, con IA, multiplataforma. Gratis y Pro.">
+  <meta name="description" content="Scrumban: herramienta de gestión ágil Scrum + Kanban en español. Gratis, open source, sin servidor, con IA. Ideal para freelancers y startups LATAM.">
+  <meta property="og:title" content="Scrumban — Gestión ágil para LATAM">
+  <meta property="og:description" content="Scrumban: Scrum + Kanban en español. Gratis, open source, multiplataforma.">
   <meta property="og:image" content="/og-image.png">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="alternate icon" href="/favicon.ico" type="image/x-icon">
-<link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="manifest" href="/manifest.json">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="/landing/css/style.css">
 </head>
 <body>
 
-  <!-- ======== NAV ======== -->
-  <nav class="navbar" role="navigation" aria-label="Navegación principal">
-    <div class="container">
-      <a href="/" class="nav-logo">
-        <span class="logo-accent">S</span>crumban
-      </a>
-      <button class="nav-toggle" aria-label="Abrir menú" onclick="document.querySelector('.nav-links').classList.toggle('open')">
-        <i class="fas fa-bars"></i>
-      </button>
-      <ul class="nav-links">
-        <li><a href="#features">Funcionalidades</a></li>
-        <li><a href="#pricing">Precios</a></li>
-        <li><a href="https://github.com" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a></li>
-        <li><a href="/app" class="btn btn-primary btn-sm">Launch App</a></li>
-      </ul>
-    </div>
-  </nav>
+<nav class="navbar">
+  <div class="container">
+    <a href="/" class="nav-logo">
+      <svg width="28" height="28" viewBox="0 0 32 32" fill="none" style="flex-shrink:0">
+        <rect width="32" height="32" rx="8" fill="#6366f1"/>
+        <text x="16" y="23" font-family="Outfit,sans-serif" font-size="20" font-weight="800" fill="#fff" text-anchor="middle">S</text>
+      </svg>
+      crumban
+    </a>
+    <button class="nav-toggle" aria-label="Menú" onclick="this.nextElementSibling.classList.toggle('open')">
+      <i class="fas fa-bars"></i>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#features">Funcionalidades</a></li>
+      <li><a href="#pricing">Precios</a></li>
+      <li><a href="https://github.com/skinnypizza/aurora" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i> <span class="nav-star" id="ghStars">★</span></a></li>
+      <li><a href="/app" class="btn btn-primary btn-sm">Launch App <i class="fas fa-arrow-right" style="font-size:12px"></i></a></li>
+    </ul>
+  </div>
+</nav>
 
-  <!-- ======== HERO ======== -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <span class="badge"><i class="fas fa-sparkles"></i> Scrum + Kanban en español</span>
-        <h1>
-          Gestiona tus proyectos con<br>
-          <span class="highlight">Scrumban</span>
-        </h1>
-        <p>
-          La herramienta híbrida que combina la planificación de Scrum con la 
-          flexibilidad de Kanban. Sin servidor, en español, y lista para tu equipo.
-        </p>
-        <div class="hero-buttons">
-          <a href="/app" class="btn btn-primary btn-lg">Comenzar gratis <i class="fas fa-arrow-right"></i></a>
-          <a href="#pricing" class="btn btn-secondary btn-lg">Ver precios</a>
-        </div>
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Open Source · En Español
       </div>
-      <div class="mockup">
-        <div class="mockup-grid"></div>
-        <div class="mockup-glow"></div>
-        <div class="mockup-inner">
-          <div class="icon"><i class="fas fa-layer-group"></i></div>
-          <p>Scrumban Board — Vista previa</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ======== FEATURES ======== -->
-  <section id="features" class="section">
-    <div class="container">
-      <h2 class="anim-hidden">Todo lo que necesitas en un solo lugar</h2>
-      <p class="section-subtitle anim-hidden delay-1">
-        Pensado para la forma de trabajar de equipos pequeños y startups en LATAM.
-        Liviano, potente y sin complicaciones.
+      <h1>
+        Gestión ágil que<br>
+        <span class="gradient-text">habla tu idioma</span>
+      </h1>
+      <p class="hero-sub">
+        La herramienta que combina lo mejor de <strong>Scrum</strong> y <strong>Kanban</strong>.
+        Liviana, gratuita y diseñada para la forma de trabajar en LATAM.
       </p>
-      <div class="features-grid">
-
-        <div class="feature-card anim-hidden delay-1">
-          <div class="feature-icon"><i class="fas fa-compress-arrows-alt"></i></div>
-          <h3>Scrumban Híbrido</h3>
-          <p>La combinación perfecta de la planificación de Scrum con la flexibilidad del Kanban en un solo tablero visual.</p>
+      <div class="hero-actions">
+        <a href="/app" class="btn btn-primary btn-lg">
+          Comenzar gratis <i class="fas fa-arrow-right"></i>
+        </a>
+        <a href="#features" class="btn btn-ghost btn-lg">
+          <i class="fas fa-play-circle"></i> Ver demo
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-number">100%</span>
+          <span class="stat-label">Gratis local</span>
         </div>
-
-        <div class="feature-card anim-hidden delay-2">
-          <div class="feature-icon"><i class="fas fa-database"></i></div>
-          <h3>Zero Config</h3>
-          <p>Almacenamiento local en archivos JSON. No necesitas servidor, base de datos ni conexión a internet.</p>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-number">Zero</span>
+          <span class="stat-label">Configuración</span>
         </div>
-
-        <div class="feature-card anim-hidden delay-3">
-          <div class="feature-icon"><i class="fas fa-language"></i></div>
-          <h3>En Español</h3>
-          <p>UI completamente en español, con términos y flujos pensados para la forma de trabajar en LATAM.</p>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-number">Español</span>
+          <span class="stat-label">Nativo</span>
         </div>
-
-        <div class="feature-card anim-hidden delay-4">
-          <div class="feature-icon"><i class="fas fa-tasks"></i></div>
-          <h3>Sprints + MoSCoW</h3>
-          <p>Planificación con Story Points, priorización real con método MoSCoW y retrospectivas integradas.</p>
-        </div>
-
-        <div class="feature-card anim-hidden delay-5">
-          <div class="feature-icon"><i class="fas fa-brain"></i></div>
-          <h3>IA Integrada</h3>
-          <p>Sugerencias inteligentes para escribir mejores historias de usuario, estimar tareas y detectar riesgos.</p>
-        </div>
-
-        <div class="feature-card anim-hidden delay-6">
-          <div class="feature-icon"><i class="fas fa-desktop"></i></div>
-          <h3>Multiplataforma</h3>
-          <p>Web app progresiva + Desktop app (Electron). Tu tablero siempre contigo, donde sea que trabajes.</p>
-        </div>
-
       </div>
     </div>
-  </section>
-
-  <!-- ======== PRICING ======== -->
-  <section id="pricing" class="section">
-    <div class="container">
-      <h2 class="anim-hidden">Planes simples, sin sorpresas</h2>
-      <p class="section-subtitle anim-hidden delay-1">
-        Empieza gratis. Actualiza cuando necesites más. Sin tarjeta de crédito.
-      </p>
-      <div class="pricing-grid">
-
-        <!-- Free -->
-        <div class="pricing-card anim-hidden delay-2">
-          <div class="pricing-name">Gratis</div>
-          <div class="pricing-price"><span class="currency">$</span>0</div>
-          <p class="pricing-desc">Perfecto para empezar</p>
-          <ul class="pricing-features">
-            <li><i class="fas fa-check"></i> Modo local (JSON)</li>
-            <li><i class="fas fa-check"></i> 1 proyecto</li>
-            <li><i class="fas fa-check"></i> 1 miembro</li>
-            <li><i class="fas fa-check"></i> Métricas básicas</li>
-            <li><i class="fas fa-check"></i> 10 sugerencias IA / mes</li>
-            <li><i class="fas fa-times"></i> Sincronización cloud</li>
-            <li><i class="fas fa-times"></i> Exportaciones</li>
-          </ul>
-          <a href="/app" class="btn btn-outline btn-block">Get Started</a>
+    <div class="hero-visual">
+      <div class="hero-mockup">
+        <div class="mockup-header">
+          <div class="mockup-dots"><span></span><span></span><span></span></div>
+          <div class="mockup-title">Scrumban Board</div>
         </div>
-
-        <!-- Pro -->
-        <div class="pricing-card popular anim-hidden delay-3">
-          <div class="pricing-name">Pro</div>
-          <div class="pricing-price"><span class="currency">$</span>9 <span class="period">/mes</span></div>
-          <p class="pricing-desc">Para equipos que crecen</p>
-          <ul class="pricing-features">
-            <li><i class="fas fa-check"></i> Sincronización cloud</li>
-            <li><i class="fas fa-check"></i> Hasta 10 proyectos</li>
-            <li><i class="fas fa-check"></i> Hasta 8 miembros</li>
-            <li><i class="fas fa-check"></i> Métricas avanzadas</li>
-            <li><i class="fas fa-check"></i> IA ilimitada</li>
-            <li><i class="fas fa-check"></i> Exportaciones y backups</li>
-            <li><i class="fas fa-check"></i> Prioridad en soporte</li>
-          </ul>
-          <a href="/app?upgrade=pro" class="btn btn-primary btn-block">Suscribirse</a>
-          <p class="pricing-yearly-note">$99/año — ahorra 2 meses</p>
+        <div class="mockup-body">
+          <div class="mockup-col">
+            <div class="mockup-col-title">Backlog</div>
+            <div class="mockup-card" style="border-left-color:#ef4444"><div class="mc-prio">Must</div><div class="mc-title">Login de usuarios</div></div>
+            <div class="mockup-card" style="border-left-color:#f59e0b"><div class="mc-prio">Should</div><div class="mc-title">Dashboard</div></div>
+          </div>
+          <div class="mockup-col">
+            <div class="mockup-col-title">In Progress</div>
+            <div class="mockup-card" style="border-left-color:#6366f1"><div class="mc-prio">Must</div><div class="mc-title">API REST</div><div class="mc-assign">JOS</div></div>
+          </div>
+          <div class="mockup-col">
+            <div class="mockup-col-title">Done</div>
+            <div class="mockup-card" style="border-left-color:#10b981"><div class="mc-prio">Must</div><div class="mc-title">Setup proyecto</div><div class="mc-assign">GER</div></div>
+            <div class="mockup-card" style="border-left-color:#10b981"><div class="mc-prio">Must</div><div class="mc-title">Base de datos</div></div>
+          </div>
         </div>
+      </div>
+        <div class="mockup-glow-bg"></div>
+    </div>
+  </div>
+</section>
 
-        <!-- Enterprise -->
-        <div class="pricing-card anim-hidden delay-4">
-          <div class="pricing-name">Enterprise</div>
-          <div class="pricing-price"><span class="currency">$</span>Custom</div>
-          <p class="pricing-desc">Para organizaciones</p>
-          <ul class="pricing-features">
-            <li><i class="fas fa-check"></i> Todo lo de Pro</li>
-            <li><i class="fas fa-check"></i> Proyectos y miembros ilimitados</li>
-            <li><i class="fas fa-check"></i> White-label</li>
-            <li><i class="fas fa-check"></i> API dedicada</li>
-            <li><i class="fas fa-check"></i> SLA garantizado</li>
-            <li><i class="fas fa-check"></i> Soporte dedicado</li>
-            <li><i class="fas fa-check"></i> Onboarding asistido</li>
-          </ul>
-          <a href="mailto:enterprise@scrumban.app" class="btn btn-outline btn-block">Contactar ventas</a>
+<section id="features" class="section alt">
+  <div class="container">
+    <div class="section-label anim-hidden">Funcionalidades</div>
+    <h2 class="anim-hidden">Todo lo que necesitas, <span class="gradient-text">nada que sobre</span></h2>
+    <p class="section-desc anim-hidden">Scrumban resuelve los problemas reales de los equipos LATAM. Sin bloatware, sin curvas de aprendizaje.</p>
+    <div class="features-grid">
+      <div class="feature-card anim-hidden">
+        <div class="fc-icon" style="background:rgba(99,102,241,0.15);color:#818cf8">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
         </div>
-
+        <h3>Scrumban Híbrido</h3>
+        <p>La planificación de Scrum con la flexibilidad de Kanban. Sprints, columnas, WIP limits y retrospectivas integradas.</p>
+      </div>
+      <div class="feature-card anim-hidden">
+        <div class="fc-icon" style="background:rgba(16,185,129,0.15);color:#34d399">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>Cero Configuración</h3>
+        <p>Descarga, ejecuta y ya. Sin servidores, sin bases de datos, sin cuentas. Tus datos en archivos JSON, tuyos para siempre.</p>
+      </div>
+      <div class="feature-card anim-hidden">
+        <div class="fc-icon" style="background:rgba(245,158,11,0.15);color:#fbbf24">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <h3>En Español LATAM</h3>
+        <p>Toda la interfaz en español, con términos ágiles que usamos en la región. Sin traducciones automáticas.</p>
+      </div>
+      <div class="feature-card anim-hidden">
+        <div class="fc-icon" style="background:rgba(239,68,68,0.15);color:#f87171">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l1.5 4L17 4l-2 4 4-1-3 4 5 2-5 2 3 4-4-1 2 4-4-1.5L12 22l-1.5-4L7 20l2-4-4 1 3-4-5-2 5-2-3-4 4 1-2-4 4 1.5L12 2z"/></svg>
+        </div>
+        <h3>Sprints + MoSCoW</h3>
+        <p>Priorización real con Must/Should/Could/Wont, Story Points, velocity charts y planificación de sprints.</p>
+      </div>
+      <div class="feature-card anim-hidden">
+        <div class="fc-icon" style="background:rgba(168,85,247,0.15);color:#c084fc">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        </div>
+        <h3>IA Integrada</h3>
+        <p>Sugerencias inteligentes para escribir historias de usuario, estimar esfuerzo y detectar riesgos en tu proyecto.</p>
+      </div>
+      <div class="feature-card anim-hidden">
+        <div class="fc-icon" style="background:rgba(34,211,238,0.15);color:#22d3ee">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+        </div>
+        <h3>Multiplataforma</h3>
+        <p>Web, Desktop (Electron) y PWA. Lleva tu tablero a donde vayas. Incluso sin internet.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ======== OPENCOLLECTIVE ======== -->
-  <section class="section">
-    <div class="container">
-      <div class="opencollective anim-hidden">
-        <h2>Apoya el proyecto</h2>
-        <p>
-          Scrumban es software libre y open source. Si te es útil, considera hacer una 
-          donación en OpenCollective para ayudarnos a mantenerlo y mejorarlo.
-        </p>
-        <div class="opencollective-buttons">
-          <a href="https://opencollective.com/scrumban" target="_blank" rel="noopener" class="btn btn-primary btn-lg">
-            <i class="fab fa-opencollective"></i> Donar en OpenCollective
+<section id="pricing" class="section">
+  <div class="container">
+    <div class="section-label anim-hidden">Precios</div>
+    <h2 class="anim-hidden">Invierte en tu equipo,<br><span class="gradient-text">no en herramientas</span></h2>
+    <p class="section-desc anim-hidden">Sin tarjeta de crédito. Sin límite de tiempo. El modo local siempre será gratuito.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card anim-hidden">
+        <div class="pricing-name">Free</div>
+        <div class="pricing-amount"><span class="pricing-currency">$</span>0</div>
+        <p class="pricing-period">Siempre gratis</p>
+        <ul class="pricing-list">
+          <li class="pl-yes"><i class="fas fa-check"></i> Modo local (JSON)</li>
+          <li class="pl-yes"><i class="fas fa-check"></i> 1 proyecto</li>
+          <li class="pl-yes"><i class="fas fa-check"></i> 1 miembro</li>
+          <li class="pl-yes"><i class="fas fa-check"></i> Métricas básicas</li>
+          <li class="pl-yes"><i class="fas fa-check"></i> 10 sugerencias IA/mes</li>
+          <li class="pl-no"><i class="fas fa-times"></i> Sincronización cloud</li>
+          <li class="pl-no"><i class="fas fa-times"></i> Exportaciones avanzadas</li>
+        </ul>
+        <a href="/app" class="btn btn-outline btn-block">Comenzar gratis</a>
+      </div>
+      <div class="pricing-card popular anim-hidden">
+        <div class="popular-badge">Más popular</div>
+        <div class="pricing-name">Pro</div>
+        <div class="pricing-amount"><span class="pricing-currency">$</span>9 <span class="pricing-period-inline">/mes</span></div>
+        <p class="pricing-period">$99/año — ahorra 2 meses</p>
+        <ul class="pricing-list">
+          <li class="pl-yes"><i class="fas fa-check"></i> Sincronización cloud</li>
+          <li class="pl-yes"><i class="fas fa-check"></i> Hasta 10 proyectos</li>
+          <li class="pl-yes"><i class="fas fa-check"></i> Hasta 8 miembros</li>
+          <li class="pl-yes"><i class="fas fa-check"></i> Métricas avanzadas (CFD, Lead Time)</li>
+          <li class="pl-yes"><i class="fas fa-check"></i> IA ilimitada</li>
+          <li class="pl-yes"><i class="fas fa-check"></i> Exportaciones CSV/JSON</li>
+          <li class="pl-yes"><i class="fas fa-check"></i> Backups automáticos diarios</li>
+        </ul>
+        <a href="/app?upgrade=pro" class="btn btn-primary btn-block">Suscribirse</a>
+      </div>
+      <div class="pricing-card anim-hidden">
+        <div class="pricing-name">Enterprise</div>
+        <div class="pricing-amount"><span class="pricing-currency">$</span>Custom</div>
+        <p class="pricing-period">Para organizaciones</p>
+        <ul class="pricing-list">
+          <li class="pl-yes"><i class="fas fa-check"></i> Todo lo de Pro</li>
+          <li class="pl-yes"><i class="fas fa-check"></i> Proyectos ilimitados</li>
+          <li class="pl-yes"><i class="fas fa-check"></i> Miembros ilimitados</li>
+          <li class="pl-yes"><i class="fas fa-check"></i> White-label (tu marca)</li>
+          <li class="pl-yes"><i class="fas fa-check"></i> API dedicada + Webhooks</li>
+          <li class="pl-yes"><i class="fas fa-check"></i> SLA 99.9%</li>
+          <li class="pl-yes"><i class="fas fa-check"></i> Soporte 24h dedicado</li>
+        </ul>
+        <a href="mailto:enterprise@scrumban.app" class="btn btn-outline btn-block">Contactar ventas <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="container">
+    <div class="cta-box anim-hidden">
+      <div class="cta-content">
+        <h2>¿Listo para simplificar tu <span class="gradient-text">gestión de proyectos</span>?</h2>
+        <p>Únete a los equipos LATAM que ya están usando Scrumban. Gratis, siempre.</p>
+        <div class="cta-actions">
+          <a href="/app" class="btn btn-primary btn-lg">Comenzar ahora <i class="fas fa-arrow-right"></i></a>
+          <a href="https://github.com/skinnypizza/aurora" target="_blank" rel="noopener" class="btn btn-ghost btn-lg">
+            <i class="fab fa-github"></i> Ver código
           </a>
-          <a href="/app" class="btn btn-secondary btn-lg">
-            <i class="fas fa-star"></i> Probar Scrumban
-          </a>
+          <button class="btn btn-ghost btn-lg" onclick="shareTwitter()">
+            <i class="fab fa-twitter"></i> Compartir
+          </button>
+        </div>
+        <div class="cta-stats">
+          <span><i class="fas fa-code-branch"></i> Open Source (MIT)</span>
+          <span><i class="fas fa-heart" style="color:#ef4444"></i> Hecho en LATAM</span>
+          <span><i class="fas fa-users"></i> Para equipos reales</span>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ======== FOOTER ======== -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="/" class="nav-logo"><span class="logo-accent">S</span>crumban</a>
-          <p>Scrumban es una herramienta de gestión de proyectos híbrida, open source y en español.</p>
-        </div>
-        <div>
-          <h4>Producto</h4>
-          <ul>
-            <li><a href="#features">Funcionalidades</a></li>
-            <li><a href="#pricing">Precios</a></li>
-            <li><a href="/app">Launch App</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Recursos</h4>
-          <ul>
-            <li><a href="https://docs.scrumban.app" target="_blank" rel="noopener">Documentación</a></li>
-            <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
-            <li><a href="https://opencollective.com/scrumban" target="_blank" rel="noopener">OpenCollective</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Legal</h4>
-          <ul>
-            <li><a href="/privacy">Privacidad</a></li>
-            <li><a href="/terms">Términos</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Scrumban. Open source bajo licencia MIT.</p>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo">
+          <svg width="24" height="24" viewBox="0 0 32 32" fill="none" style="flex-shrink:0">
+            <rect width="32" height="32" rx="8" fill="#6366f1"/>
+            <text x="16" y="23" font-family="Outfit,sans-serif" font-size="20" font-weight="800" fill="#fff" text-anchor="middle">S</text>
+          </svg>
+          crumban
+        </a>
+        <p class="footer-desc">Scrumban es software open source (MIT). Hecho con ❤️ para la comunidad LATAM.</p>
         <div class="footer-social">
-          <a href="https://github.com" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
-          <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter / X"><i class="fab fa-x-twitter"></i></a>
-          <a href="https://discord.gg" target="_blank" rel="noopener" aria-label="Discord"><i class="fab fa-discord"></i></a>
+          <a href="https://github.com/skinnypizza/aurora" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://twitter.com/ScrumbanApp" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
           <a href="https://opencollective.com/scrumban" target="_blank" rel="noopener" aria-label="OpenCollective"><i class="fab fa-opencollective"></i></a>
+          <a href="mailto:hello@scrumban.app" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-group">
+          <h4>Producto</h4>
+          <a href="#features">Funcionalidades</a>
+          <a href="#pricing">Precios</a>
+          <a href="/app">Launch App</a>
+          <a href="https://opencollective.com/scrumban" target="_blank" rel="noopener">Donar</a>
+        </div>
+        <div class="footer-group">
+          <h4>Recursos</h4>
+          <a href="https://github.com/skinnypizza/aurora" target="_blank" rel="noopener">GitHub</a>
+          <a href="CONTRIBUTING.md" target="_blank" rel="noopener">Contribuir</a>
+          <a href="https://github.com/skinnypizza/aurora/releases" target="_blank" rel="noopener">Changelog</a>
+          <a href="SECURITY.md" target="_blank" rel="noopener">Seguridad</a>
+        </div>
+        <div class="footer-group">
+          <h4>Comunidad</h4>
+          <a href="https://twitter.com/ScrumbanApp" target="_blank" rel="noopener">Twitter/X</a>
+          <a href="https://discord.gg/scrumban" target="_blank" rel="noopener">Discord</a>
+          <a href="https://opencollective.com/scrumban" target="_blank" rel="noopener">OpenCollective</a>
+          <a href="mailto:hello@scrumban.app">Contacto</a>
         </div>
       </div>
     </div>
-  </footer>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Scrumban. Licencia MIT.</p>
+      <div class="footer-badges">
+        <img src="https://img.shields.io/github/stars/skinnypizza/aurora?style=flat-square&label=GitHub&color=6366f1" alt="GitHub stars"/>
+        <img src="https://img.shields.io/github/license/skinnypizza/aurora?style=flat-square&label=Licencia&color=10b981" alt="License"/>
+      </div>
+    </div>
+  </div>
+</footer>
 
-  <!-- ======== Scroll animation script (vanilla) ======== -->
-  <script>
-    (function() {
-      var els = document.querySelectorAll('.anim-hidden, .anim-hidden-left, .anim-hidden-right');
-      if ('IntersectionObserver' in window) {
-        var observer = new IntersectionObserver(function(entries) {
-          entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('anim-visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.15 });
-        els.forEach(function(el) { observer.observe(el); });
-      } else {
-        els.forEach(function(el) { el.classList.add('anim-visible'); });
-      }
-    })();
-  </script>
+<script>
+(function() {
+  var els = document.querySelectorAll('.anim-hidden');
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.1 });
+    els.forEach(function(el) { observer.observe(el); });
+  } else { els.forEach(function(el) { el.classList.add('visible'); }); }
+})();
+
+function shareTwitter() {
+  var url = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent('Scrumban — Gestión ágil de proyectos Scrum+Kanban en español. Gratis, open source, multiplataforma.') + '&url=' + encodeURIComponent('https://aurora-production-848a.up.railway.app/') + '&hashtags=scrumban,agile,opensource,latam';
+  window.open(url, '_blank', 'width=600,height=400');
+}
+</script>
+
 </body>
 </html>

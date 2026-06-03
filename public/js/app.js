@@ -186,9 +186,10 @@ function renderUserProfile() {
   const el = document.getElementById('userProfile'); if (!el || !S.user) return;
   const planBadge = S.plan === 'pro' ? '<span style="font-size:9px;background:var(--accent);color:#fff;padding:1px 6px;border-radius:6px;font-weight:700;margin-left:6px">PRO</span>' :
     S.plan === 'enterprise' ? '<span style="font-size:9px;background:var(--accent);color:#fff;padding:1px 6px;border-radius:6px;font-weight:700;margin-left:6px">ENTERPRISE</span>' : '';
+  const eaBadge = checkEarlyAdopter() ? '<span style="font-size:8px;background:#f59e0b;color:#000;padding:1px 6px;border-radius:6px;font-weight:700;margin-left:4px">FOUNDER</span>' : '';
   el.innerHTML = `
     <div class="team-avatar" style="background:var(--accent)22;color:var(--accent);width:40px;height:40px">${S.user.name.charAt(0)}</div>
-    <div class="info"><div class="name">${esc(S.user.name)}${planBadge}</div><div class="meta">${esc(S.user.email)}</div></div>`;
+    <div class="info"><div class="name">${esc(S.user.name)}${planBadge}${eaBadge}</div><div class="meta">${esc(S.user.email)}</div></div>`;
   setModeIndicator('CLOUD', '#10b981', 'rgba(16,185,129,0.15)');
 }
 

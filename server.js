@@ -238,11 +238,79 @@ if (!USE_LOCAL_MODE) {
     }
   });
 
-  // Mercado Pago webhook (placeholder)
+    // Mercado Pago webhook (placeholder)
   app.post('/api/subscription/webhook/mercadopago', express.raw({ type: 'application/json' }), async (req, res) => {
     res.json({ received: true });
   });
 }
+
+// ── Newsletter / Marketing ──
+app.post('/api/newsletter/subscribe', async (req, res) => {
+  const { email } = req.body;
+  if (!email || !email.includes('@')) return res.status(400).json({ error: 'Email inválido' });
+  try {
+    const db = repo && repo.db ? repo.db : null;
+    if (db) {
+      const existing = await db.collection('newsletter').findOne({ email: email.toLowerCase() });
+      if (existing) return res.json({ ok: true, message: 'Ya estás suscrito' });
+      await db.collection('newsletter').insertOne({
+        email: email.toLowerCase(),
+        source: req.headers.referer || 'direct',
+        createdAt: new Date()
+      });
+    }
+    res.json({ ok: true, message: '¡Gracias por suscribirte!' });
+  } catch(e) {
+    res.status(500).json({ error: 'Error al suscribir' });
+  }
+});
+
+// ── Feedback ──
+app.post('/api/feedback', async (req, res) => {
+  const { type, message, email } = req.body;
+  if (!message) return res.status(400).json({ error: 'Mensaje requerido' });
+  try {
+    const db = repo && repo.db ? repo.db : null;
+    if (db) {
+      await db.collection('feedback').insertOne({
+        type: type || 'other',
+        message,
+        email: email || null,
+        userAgent: req.headers['user-agent'] || null,
+        createdAt: new Date()
+      });
+    }
+    res.json({ ok: true });
+  } catch(e) {
+    res.status(500).json({ error: 'Error al guardar feedback' });
+  }
+});
+
+// ── Early Adopter ──
+app.post('/api/early-adopter/claim', protect, async (req, res) => {
+  if (USE_LOCAL_MODE) return res.json({ claimed: false, message: 'Modo local no soporta early adopter' });
+  try {
+    const db = repo.db;
+    const existing = await db.collection('early_adopters').findOne({ userId: new (require('mongodb').ObjectId)(req.user.id) });
+    if (existing) return res.json({ claimed: true, already: true });
+    const count = await db.collection('early_adopters').countDocuments();
+    if (count >= 1000) return res.json({ claimed: false, message: 'Ya no quedan cupos de Early Adopter' });
+    await db.collection('early_adopters').insertOne({
+      userId: new (require('mongodb').ObjectId)(req.user.id),
+      email: req.user.email,
+      claimedAt: new Date(),
+      badge: 'founder'
+    });
+    await db.collection('subscriptions').updateOne(
+      { userId: new (require('mongodb').ObjectId)(req.user.id) },
+      { $setOnInsert: { earlyAdopter: true, earlyAdopterPrice: '4.99', plan: 'pro', status: 'active', createdAt: new Date(), updatedAt: new Date() } },
+      { upsert: true }
+    );
+    res.json({ claimed: true, badge: 'founder', message: '¡Eres Early Adopter!' });
+  } catch(e) {
+    res.status(500).json({ error: e.message });
+  }
+});
 
 app.get('/api/projects', protect, async (req, res) => {
   if (USE_LOCAL_MODE) { res.json(await repo.getProjectsWithStats()); return; }
