@@ -1,7 +1,11 @@
 {
   "name": "scrumban-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Scrumban Board — Gestión de proyectos con archivos JSON",
+  "author": {
+    "name": "skinnypizza",
+    "email": "skinnypizza@users.noreply.github.com"
+  },
   "main": "electron/main.js",
   "scripts": {
     "start": "node server.js",
@@ -9,10 +13,10 @@
     "lint": "eslint server.js auth-service.js file-repo.js mongo-repo.js cli.js",
     "lint:fix": "eslint --fix server.js auth-service.js file-repo.js mongo-repo.js cli.js",
     "electron-start": "electron .",
-    "build:win": "electron-builder --win",
-    "build:linux": "electron-builder --linux",
-    "build:mac": "electron-builder --mac",
-    "build:all": "electron-builder --win --linux --mac",
+    "build:win": "electron-builder --win --publish never",
+    "build:linux": "electron-builder --linux --publish never",
+    "build:mac": "electron-builder --mac --publish never",
+    "build:all": "electron-builder --win --linux --mac --publish never",
     "release": "electron-builder --win --linux --mac --publish always"
   },
   "build": {
