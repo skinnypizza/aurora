@@ -4,9 +4,10 @@ const jwt = require('jsonwebtoken');
 function getJwtSecret() {
   if (!process.env.JWT_SECRET) {
     console.error('JWT_SECRET no configurado. Establece JWT_SECRET en .env para modo cloud.');
-    if (process.env.MONGO_URI) {process.exit(1);}
+    if (process.env.MONGO_URI) { process.exit(1); }
+    throw new Error('JWT_SECRET requerido en modo cloud');
   }
-  return process.env.JWT_SECRET || 'dev-fallback-inseguro';
+  return process.env.JWT_SECRET;
 }
 
 class AuthService {
@@ -15,10 +16,13 @@ class AuthService {
   }
 
   async register(email, password, name) {
+    if (!password || password.length < 8) {
+      throw new Error('La contraseña debe tener al menos 8 caracteres');
+    }
     const existing = await this.db.collection('users').findOne({ email: email.toLowerCase() });
-    if (existing) {throw new Error('El usuario ya existe');}
+    if (existing) {throw new Error('Error al registrar');}
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 12);
     const user = {
       email: email.toLowerCase(),
       password: hashedPassword,

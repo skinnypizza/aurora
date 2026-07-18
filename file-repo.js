@@ -15,16 +15,40 @@ class FileRepository {
     fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
   }
 
-  pDir(id) { return path.join(this.DATA_DIR, id); }
-  sDir(id) { return path.join(this.DATA_DIR, id, 'backlog'); }
-  sprDir(id) { return path.join(this.DATA_DIR, id, 'sprints'); }
-  docsDir(id) { return path.join(this.DATA_DIR, id, 'docs'); }
+  _sanitizeId(id) {
+    return String(id).replace(/[^a-zA-Z0-9-_.]/g, '');
+  }
+  _resolvePath(base, segments) {
+    const fullPath = path.resolve(path.join(base, ...segments));
+    if (!fullPath.startsWith(path.resolve(base))) {
+      throw new Error('Invalid path');
+    }
+    return fullPath;
+  }
+
+  pDir(id) {
+    const safeId = this._sanitizeId(id).replace(/\.\./g, '');
+    return this._resolvePath(this.DATA_DIR, [safeId]);
+  }
+  sDir(id) {
+    const safeId = this._sanitizeId(id).replace(/\.\./g, '');
+    return this._resolvePath(this.DATA_DIR, [safeId, 'backlog']);
+  }
+  sprDir(id) {
+    const safeId = this._sanitizeId(id).replace(/\.\./g, '');
+    return this._resolvePath(this.DATA_DIR, [safeId, 'sprints']);
+  }
+  docsDir(id) {
+    const safeId = this._sanitizeId(id).replace(/\.\./g, '');
+    return this._resolvePath(this.DATA_DIR, [safeId, 'docs']);
+  }
 
   storyFile(projectId, storyId) {
-    return path.join(this.sDir(projectId), storyId.replace(/\./g, '-') + '.json');
+    const safeStoryId = this._sanitizeId(storyId).replace(/\.\./g, '');
+    return this._resolvePath(this.sDir(projectId), [safeStoryId + '.json']);
   }
   sprintFile(projectId, sprintNum) {
-    return path.join(this.sprDir(projectId), `sprint-${String(sprintNum).padStart(2,'0')}.json`);
+    return this._resolvePath(this.sprDir(projectId), [`sprint-${String(sprintNum).padStart(2,'0')}.json`]);
   }
 
   // ── Project ──

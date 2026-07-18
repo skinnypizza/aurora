@@ -202,7 +202,7 @@ function setModeIndicator(text, color, bg) {
   el.style.display = 'block';
 }
 
-function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 function sumSp(stories) { return stories.reduce((a,s)=>a+(parseInt(s.sp)||0),0); }
 
 // ── PROJECTS ──

@@ -18,10 +18,31 @@ const SubscriptionService = require('./subscription-service');
 const app = express();
 const PORT = process.env.PORT || 3737;
 
-app.use(helmet({ contentSecurityPolicy: false, crossOriginEmbedderPolicy: false }));
+app.use(helmet({
+  crossOriginEmbedderPolicy: false,
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", 'https://cdnjs.cloudflare.com'],
+      styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com', 'https://cdnjs.cloudflare.com'],
+      fontSrc: ["'self'", 'https://fonts.gstatic.com', 'https://cdnjs.cloudflare.com'],
+      imgSrc: ["'self'", 'data:', 'https://via.placeholder.com', 'https://img.shields.io'],
+      connectSrc: ["'self'"],
+      objectSrc: ["'none'"],
+      frameSrc: ["'none'"],
+    },
+  },
+}));
 app.use(compression());
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
-app.use(cors({ origin: process.env.CORS_ORIGIN || '*', credentials: true }));
+const corsOrigins = process.env.CORS_ORIGIN
+  ? process.env.CORS_ORIGIN.split(',').map(function (s) { return s.trim(); })
+  : (process.env.NODE_ENV === 'production' ? [] : '*');
+if (corsOrigins.length === 0 && process.env.NODE_ENV === 'production') {
+  console.error('CORS_ORIGIN no configurado en producción. Establece CORS_ORIGIN en .env');
+  process.exit(1);
+}
+app.use(cors({ origin: corsOrigins.length === 1 ? corsOrigins[0] : corsOrigins, credentials: true }));
 app.use(express.json({ limit: '2mb' }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public'), { index: false }));
@@ -51,6 +72,9 @@ let repo;
 let auth = null;
 
 const authLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 20, message: { error: 'Demasiados intentos. Intenta de nuevo en 15 minutos.' } });
+const generalLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 60, message: { error: 'Demasiadas solicitudes. Intenta de nuevo en 15 minutos.' } });
+const newsletterLimiter = rateLimit({ windowMs: 60 * 60 * 1000, max: 5, message: { error: 'Demasiados intentos de suscripción.' } });
+const feedbackLimiter = rateLimit({ windowMs: 60 * 60 * 1000, max: 10, message: { error: 'Demasiados intentos de feedback.' } });
 
 const ALLOWED_PROJECT_FIELDS = ['title', 'description', 'techStack', 'status', 'currentSprint', 'totalSprints', 'wipLimits'];
 const ALLOWED_STORY_FIELDS = ['title', 'priority', 'sp', 'status', 'assignee', 'sprint', 'story', 'subtasks', 'ac', 'deps'];
@@ -141,6 +165,19 @@ const protect = (req, res, next) => {
   }
 };
 
+const ensureProjectAccess = async (req, res, next) => {
+  if (USE_LOCAL_MODE) { return next(); }
+  try {
+    const project = await repo.getProject(req.params.id, req.user.id);
+    if (!project) { return res.status(404).json({ error: 'Proyecto no encontrado' }); }
+    req.project = project;
+    next();
+  } catch (e) {
+    console.error('  Error verificando acceso al proyecto:', e.message);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
 const getPlan = async (req, res, next) => {
   if (USE_LOCAL_MODE || !req.user) { req.plan = 'free'; req.limits = {}; return next(); }
   const subService = req.app.get('subscriptionService');
@@ -155,7 +192,7 @@ const getPlan = async (req, res, next) => {
 app.get('/api/status', (req, res) => { res.json({ mode: USE_LOCAL_MODE ? 'local' : 'cloud', ready: true }); });
 
 if (!USE_LOCAL_MODE && auth) {
-  app.post('/api/auth/register', authLimiter, async (req, res) => { try { const result = await auth.register(req.body.email, req.body.password, req.body.name); res.json(result); } catch(e) { res.status(400).json({ error: e.message }); } });
+  app.post('/api/auth/register', authLimiter, async (req, res) => { try { const result = await auth.register(req.body.email, req.body.password, req.body.name); res.json(result); } catch(e) { res.status(400).json({ error: 'Error al registrar. Revisa tus datos.' }); } });
   app.post('/api/auth/login', authLimiter, async (req, res) => { try { const result = await auth.login(req.body.email, req.body.password); setTokenCookie(res, result.token); const subService = req.app.get('subscriptionService'); let plan = 'free', limits = {}; if (subService) { try { plan = await subService.getUserPlan(result.user.id); limits = await subService.getLimits(result.user.id); } catch (_) { /* stripe no configurado */ } } res.json({ user: { ...result.user, plan, limits } }); } catch(e) { res.status(401).json({ error: e.message }); } });
   app.post('/api/auth/logout', (req, res) => { clearTokenCookie(res); res.json({ ok: true }); });
   app.get('/api/auth/me', protect, getPlan, async (req, res) => { const user = await repo.db.collection('users').findOne({ _id: new (require('mongodb').ObjectId)(req.user.id) }, { projection: { password: 0 } }); if (!user) {return res.status(404).json({ error: 'Usuario no encontrado' });} res.json({ id: user._id.toString(), email: user.email, name: user.name, plan: req.plan, limits: req.limits }); });
@@ -174,7 +211,8 @@ if (!USE_LOCAL_MODE) {
       const status = await subService.getSubscriptionStatus(req.user.id);
       res.json(status);
     } catch (e) {
-      res.status(500).json({ error: e.message });
+      console.error('  Error en subscription status:', e.message);
+      res.status(500).json({ error: 'Error al obtener estado de suscripción' });
     }
   });
 
@@ -189,7 +227,8 @@ if (!USE_LOCAL_MODE) {
       const result = await subService.createCheckoutSession(req.user.id, user.email, priceId, successUrl, cancelUrl);
       res.json(result);
     } catch (e) {
-      res.status(500).json({ error: e.message });
+      console.error('  Error en create-checkout:', e.message);
+      res.status(500).json({ error: 'Error al crear sesión de pago' });
     }
   });
 
@@ -201,7 +240,8 @@ if (!USE_LOCAL_MODE) {
       const result = await subService.createCustomerPortal(req.user.id, returnUrl);
       res.json(result);
     } catch (e) {
-      res.status(500).json({ error: e.message });
+      console.error('  Error en create-portal:', e.message);
+      res.status(500).json({ error: 'Error al crear portal de gestión' });
     }
   });
 
@@ -212,7 +252,8 @@ if (!USE_LOCAL_MODE) {
       await subService.cancelSubscription(req.user.id);
       res.json({ ok: true });
     } catch (e) {
-      res.status(500).json({ error: e.message });
+      console.error('  Error en cancel subscription:', e.message);
+      res.status(500).json({ error: 'Error al cancelar suscripción' });
     }
   });
 
@@ -231,7 +272,8 @@ if (!USE_LOCAL_MODE) {
       await subService.handleStripeWebhook(event);
       res.json({ received: true });
     } catch (e) {
-      res.status(500).json({ error: e.message });
+      console.error('  Error en webhook Stripe:', e.message);
+      res.status(500).json({ error: 'Error al procesar webhook' });
     }
   });
 
@@ -242,7 +284,7 @@ if (!USE_LOCAL_MODE) {
 }
 
 // ── Newsletter / Marketing ──
-app.post('/api/newsletter/subscribe', async (req, res) => {
+app.post('/api/newsletter/subscribe', newsletterLimiter, async (req, res) => {
   const { email } = req.body;
   if (!email || !email.includes('@')) {return res.status(400).json({ error: 'Email inválido' });}
   try {
@@ -263,7 +305,7 @@ app.post('/api/newsletter/subscribe', async (req, res) => {
 });
 
 // ── Feedback ──
-app.post('/api/feedback', async (req, res) => {
+app.post('/api/feedback', feedbackLimiter, async (req, res) => {
   const { type, message, email } = req.body;
   if (!message) {return res.status(400).json({ error: 'Mensaje requerido' });}
   try {
@@ -305,7 +347,8 @@ app.post('/api/early-adopter/claim', protect, async (req, res) => {
     );
     res.json({ claimed: true, badge: 'founder', message: '¡Eres Early Adopter!' });
   } catch(e) {
-    res.status(500).json({ error: e.message });
+    console.error('  Error en early-adopter:', e.message);
+    res.status(500).json({ error: 'Error al reclamar cupo' });
   }
 });
 
@@ -314,7 +357,7 @@ app.get('/api/projects', protect, async (req, res) => {
   res.json(await repo.getProjectsForUser(req.user.id));
 });
 
-app.post('/api/projects', protect, async (req, res) => {
+app.post('/api/projects', protect, generalLimiter, async (req, res) => {
   const { id, title, description, techStack } = req.body;
   if (!id || !title) {return res.status(400).json({ error: 'id y title requeridos' });}
   const slug = id.toLowerCase().replace(/[^a-z0-9-]/g, '-');
@@ -356,7 +399,7 @@ app.post('/api/import', protect, async (req, res) => {
 app.delete('/api/projects/:id', protect, async (req, res) => { await repo.deleteProject(req.params.id); res.json({ ok: true }); });
 
 // Stories
-app.get('/api/projects/:id/stories', protect, async (req, res) => { res.json(await repo.getStories(req.params.id)); });
+app.get('/api/projects/:id/stories', protect, ensureProjectAccess, async (req, res) => { res.json(await repo.getStories(req.params.id)); });
 
 app.post('/api/projects/:id/stories', protect, async (req, res) => {
   const project = await repo.getProject(req.params.id);
@@ -387,7 +430,7 @@ app.put('/api/projects/:id/stories/:storyId', protect, async (req, res) => {
   await repo.saveStory(req.params.id, story); res.json(story);
 });
 
-app.delete('/api/projects/:id/stories/:storyId', protect, async (req, res) => { await repo.deleteStory(req.params.id, req.params.storyId); res.json({ ok: true }); });
+app.delete('/api/projects/:id/stories/:storyId', protect, ensureProjectAccess, async (req, res) => { await repo.deleteStory(req.params.id, req.params.storyId); res.json({ ok: true }); });
 
 app.patch('/api/projects/:id/stories/:storyId/move', protect, async (req, res) => {
   let story = await repo.getStory(req.params.id, req.params.storyId);
@@ -404,9 +447,9 @@ app.get('/api/projects/:id/team', protect, async (req, res) => {
   res.json({ ...team, localMembers: project.localMembers || [] });
 });
 
-app.get('/api/projects/:id/members', protect, async (req, res) => { res.json(await repo.getTeam(req.params.id).then(t => t?.members || [])); });
+app.get('/api/projects/:id/members', protect, ensureProjectAccess, async (req, res) => { res.json(await repo.getTeam(req.params.id).then(t => t?.members || [])); });
 
-app.put('/api/projects/:id/team', protect, async (req, res) => { await repo.saveTeam(req.params.id, req.body); res.json({ ok: true }); });
+app.put('/api/projects/:id/team', protect, ensureProjectAccess, async (req, res) => { await repo.saveTeam(req.params.id, filterBody(req.body, ['members'])); res.json({ ok: true }); });
 
 app.post('/api/projects/:id/invite', protect, async (req, res) => {
   if (USE_LOCAL_MODE) {return res.status(400).json({ error: 'No disponible en modo local' });}
@@ -453,12 +496,18 @@ app.delete('/api/projects/:id/local-members/:memberId', protect, async (req, res
 });
 
 // Sprints
-app.get('/api/projects/:id/sprints', protect, async (req, res) => { res.json(await repo.getSprints(req.params.id)); });
+app.get('/api/projects/:id/sprints', protect, ensureProjectAccess, async (req, res) => { res.json(await repo.getSprints(req.params.id)); });
 
-app.post('/api/projects/:id/sprints', protect, async (req, res) => {
-  const sprint = req.body;
+app.post('/api/projects/:id/sprints', protect, ensureProjectAccess, async (req, res) => {
+  const sprint = {
+    id: Number(req.body.id) || null,
+    name: validateString(req.body.name, 200) || 'Sprint ' + (req.body.id || ''),
+    objective: validateString(req.body.objective, 500) || '',
+    stories: validateArray(req.body.stories),
+    status: req.body.status === 'closed' ? 'closed' : 'active',
+    velocity: validateInt(req.body.velocity, 0, 9999) || 0,
+  };
   if (!sprint.id) { const existing = await repo.getSprints(req.params.id); sprint.id = Number(existing.length) + 1; }
-  sprint.id = Number(sprint.id);
   await repo.saveSprint(req.params.id, sprint); res.json(sprint);
 });
 
@@ -510,9 +559,9 @@ app.get('/api/dashboard', protect, async (req, res) => {
   res.json(results);
 });
 
-app.get('/api/projects/:id/metrics', protect, async (req, res) => { res.json(await repo.getMetrics(req.params.id)); });
+app.get('/api/projects/:id/metrics', protect, ensureProjectAccess, async (req, res) => { res.json(await repo.getMetrics(req.params.id)); });
 
-app.get('/api/projects/:id/export/markdown', protect, async (req, res) => {
+app.get('/api/projects/:id/export/markdown', protect, ensureProjectAccess, async (req, res) => {
   const md = await repo.exportToMarkdown(req.params.id);
   if (!md) {return res.status(404).json({ error: 'No encontrado' });}
   res.send(md);
