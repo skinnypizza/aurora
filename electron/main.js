@@ -1,6 +1,9 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
+process.env.USE_LOCAL_MODE = 'true';
+process.env.NODE_ENV = 'electron';
+
 const { startServer, PORT } = require('../server');
 
 let mainWindow = null;
@@ -11,7 +14,7 @@ function createWindow() {
     height: 800,
     minWidth: 1024,
     minHeight: 700,
-    title: 'Scrumban App',
+    title: 'Scrumban App — Aurora Edition',
     icon: path.join(__dirname, '..', 'public', 'favicon.ico'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),

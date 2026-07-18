@@ -9,31 +9,78 @@
     "lint": "eslint server.js auth-service.js file-repo.js mongo-repo.js cli.js",
     "lint:fix": "eslint --fix server.js auth-service.js file-repo.js mongo-repo.js cli.js",
     "electron-start": "electron .",
-    "build": "electron-builder"
+    "build:win": "electron-builder --win",
+    "build:linux": "electron-builder --linux",
+    "build:mac": "electron-builder --mac",
+    "build:all": "electron-builder --win --linux --mac",
+    "release": "electron-builder --win --linux --mac --publish always"
   },
   "build": {
     "appId": "com.scrumban.app",
     "productName": "Scrumban App",
+    "copyright": "Copyright © 2026 skinnypizza",
+    "directories": {
+      "output": "dist"
+    },
     "files": [
       "electron/**/*",
-      "server.js",
-      "auth-service.js",
-      "file-repo.js",
-      "mongo-repo.js",
-      "cli.js",
+      "*.js",
       "package.json",
       "public/**/*",
-      "routes/**/*",
-      "memory/**/*",
-      "proyectos/**/*",
-      "node_modules/**/*"
+      "proyectos/**/*"
     ],
+    "extraMetadata": {
+      "main": "electron/main.js"
+    },
     "win": {
-      "target": "nsis"
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "public/favicon.ico"
     },
     "nsis": {
       "oneClick": false,
-      "allowToChangeInstallationDirectory": true
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Scrumban App",
+      "uninstallDisplayName": "Scrumban App"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "category": "Office",
+      "icon": "public/favicon.ico"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "icon": "public/favicon.ico",
+      "category": "public.app-category.productivity"
     }
   },
   "dependencies": {
@@ -53,7 +100,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "electron": "^42.3.2",
+    "electron": "^43.1.1",
     "electron-builder": "^26.8.1",
     "eslint": "^10.4.1",
     "globals": "^17.6.0"

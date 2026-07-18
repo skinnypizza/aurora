@@ -41,7 +41,8 @@ app.get('/app/*', (req, res) => {
 
 const COLUMNS = ['Backlog', 'Todo', 'InProgress', 'Review', 'Done'];
 const USE_LOCAL_MODE = process.env.USE_LOCAL_MODE === 'true' || !process.env.MONGO_URI;
-const DATA_DIR = path.join(__dirname, 'proyectos');
+let DATA_DIR = path.join(__dirname, 'proyectos');
+try { DATA_DIR = path.join(require('electron').app.getPath('userData'), 'proyectos'); } catch (_) {}
 let repo;
 let auth = null;
 
