@@ -42,7 +42,11 @@ app.get('/app/*', (req, res) => {
 const COLUMNS = ['Backlog', 'Todo', 'InProgress', 'Review', 'Done'];
 const USE_LOCAL_MODE = process.env.USE_LOCAL_MODE === 'true' || !process.env.MONGO_URI;
 let DATA_DIR = path.join(__dirname, 'proyectos');
-try { DATA_DIR = path.join(require('electron').app.getPath('userData'), 'proyectos'); } catch (_) {}
+try {
+  DATA_DIR = path.join(require('electron').app.getPath('userData'), 'proyectos');
+} catch (_) {
+  // not running inside Electron
+}
 let repo;
 let auth = null;
 
@@ -87,8 +91,11 @@ async function initServer() {
       const subService = new SubscriptionService(repo.db, process.env.STRIPE_SECRET_KEY);
       app.set('subscriptionService', subService);
       console.log('  MongoDB: ' + process.env.MONGO_DB);
-      if (subService.stripe) console.log('  Stripe: Configurado');
-      else console.log('  Stripe: No configurado (pagos no disponibles)');
+      if (subService.stripe) {
+        console.log('  Stripe: Configurado');
+      } else {
+        console.log('  Stripe: No configurado (pagos no disponibles)');
+      }
     } catch (_) {
       console.error('  Error de conexión MongoDB. Cambiando a MODO LOCAL...');
       repo = new FileRepository(DATA_DIR);
@@ -134,17 +141,6 @@ const protect = (req, res, next) => {
   }
 };
 
-const gate = (feature) => async (req, res, next) => {
-  if (USE_LOCAL_MODE) return next();
-  const subService = req.app.get('subscriptionService');
-  if (!subService) return next();
-  try {
-    const hasAccess = await subService.hasFeature(req.user.id, feature);
-    if (!hasAccess) return res.status(403).json({ error: 'Actualiza a Pro para acceder a esta función', upgrade: true, feature });
-    next();
-  } catch (_) { next(); }
-};
-
 const getPlan = async (req, res, next) => {
   if (USE_LOCAL_MODE || !req.user) { req.plan = 'free'; req.limits = {}; return next(); }
   const subService = req.app.get('subscriptionService');
@@ -173,7 +169,7 @@ if (!USE_LOCAL_MODE) {
 
   app.get('/api/subscription/status', protect, getPlan, async (req, res) => {
     const subService = req.app.get('subscriptionService');
-    if (!subService) return res.json({ plan: 'free', limits: {}, status: 'active', features: [] });
+    if (!subService) {return res.json({ plan: 'free', limits: {}, status: 'active', features: [] });}
     try {
       const status = await subService.getSubscriptionStatus(req.user.id);
       res.json(status);
@@ -184,7 +180,7 @@ if (!USE_LOCAL_MODE) {
 
   app.post('/api/subscription/create-checkout', protect, async (req, res) => {
     const subService = req.app.get('subscriptionService');
-    if (!subService || !subService.stripe) return res.status(400).json({ error: 'Stripe no está configurado' });
+    if (!subService || !subService.stripe) {return res.status(400).json({ error: 'Stripe no está configurado' });}
     try {
       const priceId = req.body.priceId || process.env.STRIPE_PRO_PRICE_ID;
       const successUrl = req.body.successUrl || (process.env.BASE_URL || `http://localhost:${PORT}`) + '/?checkout=success';
@@ -199,7 +195,7 @@ if (!USE_LOCAL_MODE) {
 
   app.post('/api/subscription/create-portal', protect, async (req, res) => {
     const subService = req.app.get('subscriptionService');
-    if (!subService || !subService.stripe) return res.status(400).json({ error: 'Stripe no está configurado' });
+    if (!subService || !subService.stripe) {return res.status(400).json({ error: 'Stripe no está configurado' });}
     try {
       const returnUrl = req.body.returnUrl || (process.env.BASE_URL || `http://localhost:${PORT}`) + '/';
       const result = await subService.createCustomerPortal(req.user.id, returnUrl);
@@ -211,7 +207,7 @@ if (!USE_LOCAL_MODE) {
 
   app.post('/api/subscription/cancel', protect, async (req, res) => {
     const subService = req.app.get('subscriptionService');
-    if (!subService) return res.status(400).json({ error: 'Servicio no disponible' });
+    if (!subService) {return res.status(400).json({ error: 'Servicio no disponible' });}
     try {
       await subService.cancelSubscription(req.user.id);
       res.json({ ok: true });
@@ -223,7 +219,7 @@ if (!USE_LOCAL_MODE) {
   // Stripe webhook — needs raw body
   app.post('/api/subscription/webhook/stripe', express.raw({ type: 'application/json' }), async (req, res) => {
     const subService = req.app.get('subscriptionService');
-    if (!subService || !subService.stripe) return res.status(400).json({ error: 'Stripe no configurado' });
+    if (!subService || !subService.stripe) {return res.status(400).json({ error: 'Stripe no configurado' });}
     const sig = req.headers['stripe-signature'];
     let event;
     try {
@@ -248,12 +244,12 @@ if (!USE_LOCAL_MODE) {
 // ── Newsletter / Marketing ──
 app.post('/api/newsletter/subscribe', async (req, res) => {
   const { email } = req.body;
-  if (!email || !email.includes('@')) return res.status(400).json({ error: 'Email inválido' });
+  if (!email || !email.includes('@')) {return res.status(400).json({ error: 'Email inválido' });}
   try {
     const db = repo && repo.db ? repo.db : null;
     if (db) {
       const existing = await db.collection('newsletter').findOne({ email: email.toLowerCase() });
-      if (existing) return res.json({ ok: true, message: 'Ya estás suscrito' });
+      if (existing) {return res.json({ ok: true, message: 'Ya estás suscrito' });}
       await db.collection('newsletter').insertOne({
         email: email.toLowerCase(),
         source: req.headers.referer || 'direct',
@@ -269,7 +265,7 @@ app.post('/api/newsletter/subscribe', async (req, res) => {
 // ── Feedback ──
 app.post('/api/feedback', async (req, res) => {
   const { type, message, email } = req.body;
-  if (!message) return res.status(400).json({ error: 'Mensaje requerido' });
+  if (!message) {return res.status(400).json({ error: 'Mensaje requerido' });}
   try {
     const db = repo && repo.db ? repo.db : null;
     if (db) {
@@ -289,13 +285,13 @@ app.post('/api/feedback', async (req, res) => {
 
 // ── Early Adopter ──
 app.post('/api/early-adopter/claim', protect, async (req, res) => {
-  if (USE_LOCAL_MODE) return res.json({ claimed: false, message: 'Modo local no soporta early adopter' });
+  if (USE_LOCAL_MODE) {return res.json({ claimed: false, message: 'Modo local no soporta early adopter' });}
   try {
     const db = repo.db;
     const existing = await db.collection('early_adopters').findOne({ userId: new (require('mongodb').ObjectId)(req.user.id) });
-    if (existing) return res.json({ claimed: true, already: true });
+    if (existing) {return res.json({ claimed: true, already: true });}
     const count = await db.collection('early_adopters').countDocuments();
-    if (count >= 1000) return res.json({ claimed: false, message: 'Ya no quedan cupos de Early Adopter' });
+    if (count >= 1000) {return res.json({ claimed: false, message: 'Ya no quedan cupos de Early Adopter' });}
     await db.collection('early_adopters').insertOne({
       userId: new (require('mongodb').ObjectId)(req.user.id),
       email: req.user.email,
