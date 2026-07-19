@@ -1,6 +1,9 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
+app.commandLine.appendSwitch('disable-gpu');
+app.commandLine.appendSwitch('no-sandbox');
+
 process.env.USE_LOCAL_MODE = 'true';
 process.env.NODE_ENV = 'electron';
 
